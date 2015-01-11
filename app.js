@@ -239,7 +239,7 @@ express.get('/matches/:start/:end/list.json', function(req, res) {
                                         ttl = '24h';
                                     }
 
-                                    schedule.set(date, body, ttl, function(err, info) {
+                                    scheduleCache.set(date, body, ttl, function(err, info) {
                                         cb(null, underscore.values(info.matches));
                                     });
                                 }
