@@ -108,7 +108,7 @@ express.get('/filters.json', function(req, res) {
                     cb(err || http.statusCode);
                 }
                 else {
-                    cb(null, {'latestSeasonStartDate': moment.unix(body.division.time_start), 'latestSeasonStartDate': moment.unix(body.division.time_end)});
+                    cb(null, {'latestSeasonStartDate': moment.unix(body.division.time_start), 'latestSeasonEndDate': moment.unix(body.division.time_end)});
                 }
             });
         }],
