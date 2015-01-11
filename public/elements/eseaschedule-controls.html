@@ -41,38 +41,6 @@
         </div>
 
         <div class="row">
-            <div class="col s12 m4">
-                <template repeat="{{region in regions}}">
-                    <core-label>
-                        <paper-checkbox for checked value="{{region.id}}"></paper-checkbox>
-                        {{region.name}}
-                    </core-label>
-                    <br />
-                </template>
-            </div>
-
-            <div class="col s12 m4">
-                <template repeat="{{game in games}}">
-                    <core-label>
-                        <paper-checkbox for checked value="{{game.id}}"></paper-checkbox>
-                        {{game.name}}
-                    </core-label>
-                    <br />
-                </template>
-            </div>
-
-            <div class="col s12 m4">
-                <template repeat="{{division in divisions}}">
-                    <core-label>
-                        <paper-checkbox for checked value="{{division.id}}"></paper-checkbox>
-                        {{division.name}}
-                    </core-label>
-                    <br />
-                </template>
-            </div>
-        </div>
-
-        <div class="row">
             <div class="col s12 m6">
                 <paper-input-decorator label="Start Date">
                     <input is="core-input" type="date" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" on-commit="{{changeStartDate}}" preventInvalidInput></input>
@@ -85,7 +53,7 @@
                 </paper-input-decorator>
             </div>
         </div>
-        
+
         <core-ajax
         url="/filters.json"
         handleAs="json"
