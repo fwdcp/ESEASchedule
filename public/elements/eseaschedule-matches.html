@@ -1,0 +1,31 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../bower_components/core-label/core-label.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
+
+<polymer-element name="eseaschedule-controls" attributes="startDate endDate">
+    <template>
+        <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
+
+        <div class="row">
+            <div id="regions" class="col s12">
+                <template repeat="{{match in matches}}">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">{{match.division_level | capitalizeFirstLetter}}</span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            "capitalizeFirstLetter": function(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+        });
+    </script>
+</polymer-element>
