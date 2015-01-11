@@ -75,34 +75,34 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 
     <script>
-    Polymer({
-        "oldestDate": moment("2008-11-24"),
-        "newestDate": moment(),
-        "startDate": moment(),
-        "endDate": moment(),
-        "regions": [],
-        "games": [],
-        "divisions": [],
-        "getFilters": function(event, detail, sender) {
-            if (sender.response) {
-                this.regions = sender.response.regions;
-                this.games = sender.response.games;
-                this.divisions = sender.response.divisions;
-                this.startDate = new Date(sender.response.weekBegin);
-                this.endDate = new Date(sender.response.weekEnd);
-                this.oldestDate = new Date(sender.response.oldestDate);
-                this.newestDate = new Date(sender.response.nextWeekEnd);
+        Polymer({
+            "oldestDate": moment("2008-11-24"),
+            "newestDate": moment(),
+            "startDate": moment(),
+            "endDate": moment(),
+            "regions": [],
+            "games": [],
+            "divisions": [],
+            "getFilters": function(event, detail, sender) {
+                if (sender.response) {
+                    this.regions = sender.response.regions;
+                    this.games = sender.response.games;
+                    this.divisions = sender.response.divisions;
+                    this.startDate = new Date(sender.response.weekBegin);
+                    this.endDate = new Date(sender.response.weekEnd);
+                    this.oldestDate = new Date(sender.response.oldestDate);
+                    this.newestDate = new Date(sender.response.nextWeekEnd);
+                }
+            },
+            "dateValueFormatter": function(value) {
+                return value.format("YYYY-MM-DD");
+            },
+            "changeStartDate": function(event, detail, sender) {
+                this.startDate = moment(sender.committedValue);
+            },
+            "changeEndDate": function(event, detail, sender) {
+                this.endDate = moment(sender.committedValue);
             }
-        },
-        "dateValueFormatter": function(value) {
-            return value.format("YYYY-MM-DD");
-        },
-        "changeStartDate": function(event, detail, sender) {
-            this.startDate = moment(sender.committedValue);
-        },
-        "changeEndDate": function(event, detail, sender) {
-            this.endDate = moment(sender.committedValue);
-        }
-    });
-</script>
+        });
+    </script>
 </polymer-element>
