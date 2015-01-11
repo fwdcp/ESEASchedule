@@ -113,7 +113,7 @@ express.get('/filters.json', function(req, res) {
             });
         }],
         "currentWeek": function(cb) {
-            cb(null, {'weekBegin': moment().day(0), 'weekEnd': moment().day(6)});
+            cb(null, {'weekBegin': moment().day(0), 'weekEnd': moment().day(6), 'nextWeekEnd': moment().day(14)});
         }
     }, function(err, results) {
         if (err) {

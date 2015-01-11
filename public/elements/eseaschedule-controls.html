@@ -46,7 +46,7 @@
         </paper-input-decorator>
 
         <paper-input-decorator label="End Date">
-            <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" on-commit="{{changeEndDate}}" preventInvalidInput></input>
+            <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" on-commit="{{changeEndDate}}" preventInvalidInput></input>
         </paper-input-decorator>
 
         <core-ajax
@@ -58,6 +58,7 @@
     <script>
     Polymer({
         "oldestDate": new Date(2008, 10, 24),
+        "newestDate": new Date(),
         "startDate": new Date(),
         "endDate": new Date(),
         "regions": [],
@@ -71,6 +72,7 @@
                 this.startDate = new Date(sender.response.weekBegin);
                 this.endDate = new Date(sender.response.weekEnd);
                 this.oldestDate = new Date(sender.response.oldestDate);
+                this.newestDate = new Date(sender.response.nextWeekEnd);
             }
         },
         "dateValueFormatter": function(value) {
