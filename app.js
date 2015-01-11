@@ -88,7 +88,7 @@ express.get('/filters.json', function(req, res) {
                     cb(err || http.statusCode);
                 }
                 else {
-                    cb(null, {'oldestDate': body.division.time_start});
+                    cb(null, {'oldestDate': moment.unix(body.division.time_start)});
                 }
             });
         }],
@@ -108,12 +108,12 @@ express.get('/filters.json', function(req, res) {
                     cb(err || http.statusCode);
                 }
                 else {
-                    cb(null, {'latestSeasonStartDate': body.division.time_start, 'latestSeasonStartDate': body.division.time_end});
+                    cb(null, {'latestSeasonStartDate': moment.unix(body.division.time_start), 'latestSeasonStartDate': moment.unix(body.division.time_end)});
                 }
             });
         }],
         "currentWeek": function(cb) {
-            cb(null, {'weekBegin': moment().day(0), 'weekEnd': moment().day(7)});
+            cb(null, {'weekBegin': moment().day(0), 'weekEnd': moment().day(6)});
         }
     }, function(err, results) {
         if (err) {
