@@ -63,7 +63,7 @@ express.get('/filters.json', function(req, res) {
                     cb(err || http.statusCode);
                 }
                 else {
-                    var divisionIDs = underscore.flatten(underscore.map(underscore.flatten(underscore.map(underscore.values(divisions), underscore.values)), underscore.keys));
+                    var divisionIDs = underscore.flatten(underscore.map(underscore.flatten(underscore.map(underscore.values(body.select_division_id), underscore.values)), underscore.keys));
 
                     var minDivisionID = underscore.min(divisionIDs, Number);
                     var maxDivisionID = underscore.max(divisionIDs, Number);
