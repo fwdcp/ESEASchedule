@@ -1,0 +1,62 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../bower_components/core-menu/core-menu.html">
+<link rel="import" href="../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+
+<polymer-element name="eseaschedule-controls">
+    <template>
+        <paper-dropdown-menu label="Region">
+            <paper-dropdown class="dropdown">
+                <core-menu class="menu">
+                    <template repeat="{{region in regions}}">
+                        <paper-item>{{region.name}}</paper-item>
+                    </template>
+                </core-menu>
+            </paper-dropdown>
+        </paper-dropdown-menu>
+
+        <paper-dropdown-menu label="Game">
+            <paper-dropdown class="dropdown">
+                <core-menu class="menu">
+                    <template repeat="{{game in games}}">
+                        <paper-item>{{game.name}}</paper-item>
+                    </template>
+                </core-menu>
+            </paper-dropdown>
+        </paper-dropdown-menu>
+
+        <paper-dropdown-menu label="Division">
+            <paper-dropdown class="dropdown">
+                <core-menu class="menu">
+                    <template repeat="{{division in divisions}}">
+                        <paper-item>{{division.name}}</paper-item>
+                    </template>
+                </core-menu>
+            </paper-dropdown>
+        </paper-dropdown-menu>
+
+        <core-ajax
+        url="/filters.json"
+        handleAs="json"
+        auto
+        on-core-response="{{getFilters}}"></core-ajax>
+    </template>
+    <script>
+    Polymer({
+        "regions": [],
+        "games": [],
+        "divisions": [],
+        "getFilters": function(event, detail, sender) {
+            if (sender.response) {
+                this.regions = sender.response.regions;
+                this.games = sender.response.games;
+                this.divisions = sender.response.divisions;
+            }
+        }
+    });
+</script>
+</polymer-element>
