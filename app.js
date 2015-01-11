@@ -20,7 +20,7 @@ express.get('/filters.json', function(req, res) {
         json: true,
         jar: jar
     }, function(err, http, body) {
-        if (err || http.statusCode == 200) {
+        if (err || http.statusCode != 200) {
             console.log(err);
             res.status(500).end();
         }
