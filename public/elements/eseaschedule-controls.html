@@ -10,30 +10,36 @@
 
         <div class="row">
             <div class="col m4">
+                <h5>Regions</h5>
+
                 <template repeat="{{region in regions}}">
                     <core-label>
                         <paper-checkbox for checked value="{{region.id}}"></paper-checkbox>
-                        {{region.name}}
+                        <h6>{{region.name}}</h6>
                     </core-label>
                     <br />
                 </template>
             </div>
 
             <div class="col m4">
+                <h5>Games</h5>
+
                 <template repeat="{{game in games}}">
                     <core-label>
                         <paper-checkbox for checked value="{{game.id}}"></paper-checkbox>
-                        {{game.name}}
+                        <h6>{{game.name}}</h6>
                     </core-label>
                     <br />
                 </template>
             </div>
 
             <div class="col m4">
+                <h5>Divisions</h5>
+
                 <template repeat="{{division in divisions}}">
                     <core-label>
                         <paper-checkbox for checked value="{{division.id}}"></paper-checkbox>
-                        {{division.name}}
+                        <h6>{{division.name}}</h6>
                     </core-label>
                     <br />
                 </template>
@@ -42,12 +48,16 @@
 
         <div class="row">
             <div class="col s12 m6">
+                <h5>Start Date</h5>
+
                 <paper-input-decorator label="Start Date">
                     <input is="core-input" type="date" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" on-commit="{{changeStartDate}}" preventInvalidInput></input>
                 </paper-input-decorator>
             </div>
 
             <div class="col s12 m6">
+                <h5>End Date</h5>
+
                 <paper-input-decorator label="End Date">
                     <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" on-commit="{{changeEndDate}}" preventInvalidInput></input>
                 </paper-input-decorator>
