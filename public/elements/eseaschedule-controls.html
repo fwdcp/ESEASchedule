@@ -95,7 +95,7 @@
                 }
             },
             "dateValueFormatter": function(value) {
-                return value.format("YYYY-MM-DD");
+                return moment(value).format("YYYY-MM-DD");
             },
             "changeStartDate": function(event, detail, sender) {
                 this.startDate = moment(sender.committedValue);
