@@ -4,7 +4,31 @@
 <polymer-element name="eseaschedule-main" noscript>
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
-        
-        <eseaschedule-controls></eseaschedule-controls>
+
+        <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}"></eseaschedule-controls>
     </template>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+    <core-ajax
+    url="/matches/{{startDate | dateValueFormatter}}/{{endDate | dateValueFormatter}}/list.json"
+    handleAs="json"
+    auto
+    on-core-response="{{getMatches}}"></core-ajax>
+
+    <script>
+    Polymer({
+        "startDate": moment(),
+        "endDate": moment(),
+        "matches": [],
+        "dateValueFormatter": function(value) {
+            return value.format("YYYY-MM-DD");
+        },
+        "getMatches": function(event, detail, sender) {
+            if (sender.response) {
+                this.matches = sender.response;
+            }
+        }
+    });
+    </script>
 </polymer-element>
