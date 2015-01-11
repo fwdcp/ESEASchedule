@@ -48,7 +48,7 @@
         </paper-input-decorator>
 
         <paper-input-decorator label="End Date">
-            <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" on-commit="{{changeStartDate}}" preventInvalidInput></input>
+            <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" on-commit="{{changeEndDate}}" preventInvalidInput></input>
         </paper-input-decorator>
 
         <core-ajax
@@ -78,10 +78,10 @@
             return yyyy + (mm[1] ? mm : "0" + mm[0]) + (dd[1] ? dd : "0" + dd[0]);
         },
         "changeStartDate": function(event, detail, sender) {
-            this.startDate = sender.committedValue;
+            this.startDate = new Date(sender.committedValue);
         },
         "changeEndDate": function(event, detail, sender) {
-            this.endDate = sender.committedValue;
+            this.endDate = new Date(sender.committedValue);
         }
     });
 </script>
