@@ -255,7 +255,7 @@ express.get('/matches/:start/:end/list.json', function(req, res) {
                     cb(err);
                 }
                 else {
-                    cb(null, underscore.flatten(results.matches));
+                    cb(null, underscore.flatten(results));
                 }
             });
         }]
