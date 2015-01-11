@@ -4,7 +4,7 @@
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
 
-<polymer-element name="eseaschedule-controls">
+<polymer-element name="eseaschedule-controls" attributes="startDate endDate">
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
         <style>
@@ -71,12 +71,15 @@
         auto
         on-core-response="{{getFilters}}"></core-ajax>
     </template>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
     <script>
     Polymer({
-        "oldestDate": new Date(2008, 10, 24),
-        "newestDate": new Date(),
-        "startDate": new Date(),
-        "endDate": new Date(),
+        "oldestDate": moment("2008-11-24"),
+        "newestDate": moment(),
+        "startDate": moment(),
+        "endDate": moment(),
         "regions": [],
         "games": [],
         "divisions": [],
@@ -92,16 +95,13 @@
             }
         },
         "dateValueFormatter": function(value) {
-            var yyyy = value.getFullYear().toString();
-            var mm = (value.getMonth() + 1).toString();
-            var dd = value.getDate().toString();
-            return yyyy + "-" + (mm[1] ? mm : "0" + mm[0]) + "-" + (dd[1] ? dd : "0" + dd[0]);
+            return value.format("YYYY-MM-DD");
         },
         "changeStartDate": function(event, detail, sender) {
-            this.startDate = new Date(sender.committedValue);
+            this.startDate = moment(sender.committedValue);
         },
         "changeEndDate": function(event, detail, sender) {
-            this.endDate = new Date(sender.committedValue);
+            this.endDate = moment(sender.committedValue);
         }
     });
 </script>
