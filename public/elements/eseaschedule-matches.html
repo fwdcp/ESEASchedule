@@ -15,13 +15,14 @@
                         <div class="card-content">
                             <span class="card-title">
                                 <core-icon src="/img/esea_games/{{match.game_icon}}"></core-icon>&nbsp;
-                                S{{match.season}} {{match.game_abbr}} {{match.region_abbr}} {{match.division_level | capitalizeFirstLetter}} {{match | matchStatus}}: {{match.team_1_name}} vs. {{match.team_2_name}}
+                                S{{match.season}} {{match.game_abbr}} {{match.region_abbr}} {{match.division_level | capitalizeFirstLetter}} {{match | matchStatus}}: #{{match.team_1_rank}} {{match.team_1_name}} vs. #{{match.team_2_rank}} {{match.team_2_name}}
                             </span>
-                            <p><strong>Game:</strong> {{match.game_name}}</p>
-                            <p><strong>Region:</strong> {{match.region_abbr}}</p>
-                            <p><strong>Division:</strong> {{match.division_level | capitalizeFirstLetter}}</p>
-                            <p><strong>Season:</strong> {{match.season}}</p>
-                            <p><strong>Stage:</strong> {{match | matchStatus}}</p>
+                            <p>
+                                <strong>Status:</strong> {{match.state | capitalizeFirstLetter}}
+                                <template if="{{match.period}}">
+                                    &nbsp;({{match.period}})
+                                </template>
+                            </p>
                         </div>
                     </div>
                 </template>
