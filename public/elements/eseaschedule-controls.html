@@ -111,13 +111,13 @@
                 this.endDate = moment(sender.committedValue);
             },
             "changeSelections": function(event, detail, sender) {
-                this.selectedRegions = underscore.map(this.$.regions.querySelectorAll("paper-checkbox[checked]"), function(value) {
+                this.selectedRegions = _.map(this.$.regions.querySelectorAll("paper-checkbox[checked]"), function(value) {
                     return value.dataset.regionID;
                 });
-                this.selectedGames = underscore.map(this.$.games.querySelectorAll("paper-checkbox[checked]"), function(value) {
+                this.selectedGames = _.map(this.$.games.querySelectorAll("paper-checkbox[checked]"), function(value) {
                     return value.dataset.gameID;
                 });
-                this.selectedDivisions = underscore.map(this.$.divisions.querySelectorAll("paper-checkbox[checked]"), function(value) {
+                this.selectedDivisions = _.map(this.$.divisions.querySelectorAll("paper-checkbox[checked]"), function(value) {
                     return value.dataset.divisionID;
                 });
             }
