@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "async": "^0.9.0",
+    "cacheman": "^1.0.3",
     "express": "^4.10.6",
     "jade": "^1.8.2",
     "moment": "^2.8.4",
