@@ -13,10 +13,10 @@
                 <template repeat="{{match in matches}}">
                     <div class="{{ {
                         "card": true,
-                        "amber": match.schedule_status == "pending"
-                        "light-blue": match.schedule_status == "upcoming"
-                        "light-green": match.schedule_status == "live"
-                        "teal": match.schedule_status == "completed" && match.outcome_type == "normal"
+                        "amber": match.schedule_status == "pending",
+                        "light-blue": match.schedule_status == "upcoming",
+                        "light-green": match.schedule_status == "live",
+                        "teal": match.schedule_status == "completed" && match.outcome_type == "normal",
                         "pink": match.schedule_status == "completed" && match.outcome_type == "forfeit"
                     } | tokenList}}">
                         <div class="card-content">
