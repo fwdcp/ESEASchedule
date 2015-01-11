@@ -44,11 +44,11 @@
         </paper-dropdown-menu>
 
         <paper-input-decorator label="Start Date">
-            <input is="core-input" type="date" min="2008-11-24" max="{{endDate | dateValueFormatter}}" on-commit="{{changeStartDate}}" preventInvalidInput></input>
+            <input is="core-input" type="date" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" on-commit="{{changeStartDate}}" preventInvalidInput></input>
         </paper-input-decorator>
 
         <paper-input-decorator label="End Date">
-            <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" on-commit="{{changeEndDate}}" preventInvalidInput></input>
+            <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" on-commit="{{changeEndDate}}" preventInvalidInput></input>
         </paper-input-decorator>
 
         <core-ajax
@@ -69,6 +69,9 @@
                 this.regions = sender.response.regions;
                 this.games = sender.response.games;
                 this.divisions = sender.response.divisions;
+                this.startDate = new Date(sender.response.weekBegin);
+                this.endDate = new Date(sender.response.weekEnd);
+                this.oldestDate = new Date(sender.response.oldestDate);
             }
         },
         "dateValueFormatter": function(value) {
