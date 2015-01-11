@@ -8,26 +8,37 @@
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
 
-        <template repeat="{{region in regions}}">
-            <core-label>
-                <paper-checkbox for checked value="{{region.id}}"></paper-checkbox>
-                {{region.name}}
-            </core-label>
-        </template>
+        <div class="row">
+            <div class="col m4">
+                <template repeat="{{region in regions}}">
+                    <core-label>
+                        <paper-checkbox for checked value="{{region.id}}"></paper-checkbox>
+                        {{region.name}}
+                    </core-label>
+                    <br />
+                </template>
+            </div>
 
-        <template repeat="{{game in games}}">
-            <core-label>
-                <paper-checkbox for checked value="{{game.id}}"></paper-checkbox>
-                {{game.name}}
-            </core-label>
-        </template>
+            <div class="col m4">
+                <template repeat="{{game in games}}">
+                    <core-label>
+                        <paper-checkbox for checked value="{{game.id}}"></paper-checkbox>
+                        {{game.name}}
+                    </core-label>
+                    <br />
+                </template>
+            </div>
 
-        <template repeat="{{division in divisions}}">
-            <core-label>
-                <paper-checkbox for checked value="{{division.id}}"></paper-checkbox>
-                {{division.name}}
-            </core-label>
-        </template>
+            <div class="col m4">
+                <template repeat="{{division in divisions}}">
+                    <core-label>
+                        <paper-checkbox for checked value="{{division.id}}"></paper-checkbox>
+                        {{division.name}}
+                    </core-label>
+                    <br />
+                </template>
+            </div>
+        </div>
 
         <paper-input-decorator label="Start Date">
             <input is="core-input" type="date" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" on-commit="{{changeStartDate}}" preventInvalidInput></input>
