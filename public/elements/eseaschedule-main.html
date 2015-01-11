@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
 
         <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}"></eseaschedule-controls>
-        <eseaschedule-matches matches="{{matches}}"></eseaschedule-matches>
+        <eseaschedule-matches id="matches"></eseaschedule-matches>
 
         <core-ajax
         url="/matches/{{startDate | dateValueFormatter}}/{{endDate | dateValueFormatter}}/list.json"
@@ -27,7 +27,7 @@
         },
         "getMatches": function(event, detail, sender) {
             if (sender.response) {
-                this.matches = sender.response;
+                this.$.matches.matches = sender.response;
             }
         }
     });
