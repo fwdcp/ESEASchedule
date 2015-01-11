@@ -44,11 +44,11 @@
         </paper-dropdown-menu>
 
         <paper-input-decorator label="Start Date">
-            <input is="core-input" type="date" preventInvalidInput></input>
+            <input is="core-input" type="date" min="2008-11-24" max="{{endDate}} | dateValueFormatter" on-commit="{{changeStartDate}}" preventInvalidInput></input>
         </paper-input-decorator>
 
         <paper-input-decorator label="End Date">
-            <input is="core-input" type="date" preventInvalidInput></input>
+            <input is="core-input" type="date" min="{{startDate}} | dateValueFormatter" on-commit="{{changeStartDate}}" preventInvalidInput></input>
         </paper-input-decorator>
 
         <core-ajax
@@ -59,6 +59,8 @@
     </template>
     <script>
     Polymer({
+        "startDate": new Date(),
+        "endDate": new Date(),
         "regions": [],
         "games": [],
         "divisions": [],
@@ -68,6 +70,18 @@
                 this.games = sender.response.games;
                 this.divisions = sender.response.divisions;
             }
+        },
+        "dateValueFormatter": function(value) {
+            var yyyy = this.getFullYear().toString();
+            var mm = (this.getMonth() + 1).toString();
+            var dd = this.getDate().toString();
+            return yyyy + (mm[1] ? mm : "0" + mm[0]) + (dd[1] ? dd : "0" + dd[0]);
+        },
+        "changeStartDate": function(event, detail, sender) {
+            this.startDate = sender.committedValue;
+        },
+        "changeEndDate": function(event, detail, sender) {
+            this.endDate = sender.committedValue;
         }
     });
 </script>
