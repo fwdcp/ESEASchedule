@@ -36,15 +36,21 @@ express.get('/filters.json', function(req, res) {
                     };
 
                     underscore.each(body.select_region_id, function(value, key, list) {
-                        filters.regions.push({id: key, name: value});
+                        if (key != 'all') {
+                            filters.regions.push({id: key, name: value});
+                        }
                     });
 
                     underscore.each(body.select_game_id, function(value, key, list) {
-                        filters.games.push({id: key, name: value});
+                        if (key != 'all') {
+                            filters.games.push({id: key, name: value});
+                        }
                     });
 
                     underscore.each(body.select_division_level, function(value, key, list) {
-                        filters.divisions.push({id: key, name: value});
+                        if (key != 'all') {
+                            filters.divisions.push({id: key, name: value});
+                        }
                     });
 
                     cb(null, filters);
