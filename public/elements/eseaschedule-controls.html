@@ -7,6 +7,11 @@
 <polymer-element name="eseaschedule-controls">
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
+        <style>
+            paper-checkbox {
+                padding: 20px 20px 20px 0;
+            }
+        </style>
 
         <div class="row">
             <div class="col m4">
@@ -15,9 +20,8 @@
                 <template repeat="{{region in regions}}">
                     <core-label>
                         <paper-checkbox for checked value="{{region.id}}"></paper-checkbox>
-                        <h6>{{region.name}}</h6>
+                        <p>{{region.name}}</p>
                     </core-label>
-                    <br />
                 </template>
             </div>
 
@@ -27,9 +31,8 @@
                 <template repeat="{{game in games}}">
                     <core-label>
                         <paper-checkbox for checked value="{{game.id}}"></paper-checkbox>
-                        <h6>{{game.name}}</h6>
+                        <p>{{game.name}}</p>
                     </core-label>
-                    <br />
                 </template>
             </div>
 
@@ -39,9 +42,8 @@
                 <template repeat="{{division in divisions}}">
                     <core-label>
                         <paper-checkbox for checked value="{{division.id}}"></paper-checkbox>
-                        <h6>{{division.name}}</h6>
+                        <p>{{division.name}}</p>
                     </core-label>
-                    <br />
                 </template>
             </div>
         </div>
