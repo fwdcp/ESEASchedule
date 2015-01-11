@@ -186,7 +186,7 @@ express.get('/matches/:start/:end/list.json', function(req, res) {
         }],
         "matches": ['dates', 'seasonDates', function(cb, results) {
             async.map(results.dates, function(date, cb) {
-                scheduleCache.get(item, function(err, info) {
+                scheduleCache.get(date, function(err, info) {
                     if (err) {
                         cb(err);
                     }
