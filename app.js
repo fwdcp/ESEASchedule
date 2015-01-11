@@ -36,11 +36,11 @@ express.get('/filters.json', function(req, res) {
             });
 
             underscore.each(body.select_game_id, function(value, key, list) {
-                filters.regions.push({id: key, name: value});
+                filters.games.push({id: key, name: value});
             });
 
             underscore.each(body.select_division_level, function(value, key, list) {
-                filters.regions.push({id: key, name: value});
+                filters.divisions.push({id: key, name: value});
             });
 
             res.json(filters);
