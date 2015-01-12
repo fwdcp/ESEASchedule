@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../bower_components/core-drawer-panel/core-drawer-panel.html">
+<link rel="import" href="../bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
 <link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="eseaschedule-controls.html">
@@ -16,18 +17,22 @@
             }
         </style>
 
-        <core-toolbar>
-            <paper-icon-button icon="menu" on-click="{{$.main.togglePanel}}"></core-icon-button>
-            <span flex>ESEA Schedule</span>
-        </core-toolbar>
-        <core-drawer-panel id="main">
-            <div drawer>
-                <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
-            </div>
-            <div main>
-                <eseaschedule-matches id="matches"></eseaschedule-matches>
-            </div>
-        </core-drawer-panel>
+        <div fullbleed layout vertical>
+            <core-scroll-header-panel>
+                <core-toolbar>
+                    <paper-icon-button icon="menu" on-click="{{$.main.togglePanel}}"></core-icon-button>
+                    <span flex>ESEA Schedule</span>
+                </core-toolbar>
+                <core-drawer-panel id="main">
+                    <div drawer>
+                        <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
+                    </div>
+                    <div main>
+                        <eseaschedule-matches id="matches"></eseaschedule-matches>
+                    </div>
+                </core-drawer-panel>
+            </core-scroll-header-panel>
+        </div>
 
         <core-ajax
         url="/matches/{{startDate | dateValueFormatter}}/{{endDate | dateValueFormatter}}/list.json"
