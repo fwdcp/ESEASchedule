@@ -26,6 +26,29 @@
                                     ({{match.period}})
                                 </template>
                             </p>
+                            <p>
+                                <strong>Team 1:</strong> <img src="/img/countries/{{match.team_1_country_abbr | toLowerCase}}.png" /> #{{match.team_1_seed}} {{team_1_name}}
+                                <template if="{{match.type == 'regular season'}}">
+                                    ({{team_1_wins}}-{{team_1_losses}}-{{team_1_ties}})
+                                </template>
+                            </p>
+                            <p>
+                                <strong>Team 2:</strong> <img src="/img/countries/{{match.team_2_country_abbr | toLowerCase}}.png" /> #{{match.team_2_seed}} {{team_2_name}}
+                                <template if="{{match.type == 'regular season'}}">
+                                    ({{team_2_wins}}-{{team_2_losses}}-{{team_2_ties}})
+                                </template>
+                            </p>
+                            <template if="{{match.state == 'live' || (match.state == 'completed' && match.outcome_type == 'normal')}}">
+                                <p>
+                                    <strong>Score:</strong> {{match.team_1_scores.t}}-{{match.team_2_scores.t}}
+                                </p>
+                            </template>
+                            <template if="{{match.state == 'live' && match.spectv_slave_host}}">
+                                <p><strong>Match TV:</strong> <a href="steam://connect/{{match.spectv_slave_host}}:{{match.spectv_slave_port}}">{{match.spectv_slave_host}}:{{match.spectv_slave_port}}</a></p>
+                            </template>
+                            <template if="{{match.state == 'completed' && +match.spectv_demo_id}}">
+                                <p><a href="http://play.esea.net/index.php?s=servers&d=download_replay&id={{match.spectv_demo_id}}"><strong>Match Demo</strong></a></p>
+                            </template>
                         </div>
                     </div>
                 </template>
@@ -37,6 +60,9 @@
         Polymer({
             "capitalizeFirstLetter": function(string) {
                 return string.charAt(0).toUpperCase() + string.slice(1);
+            },
+            "toLowerCase": function(string) {
+                return string.toLowerCase();
             },
             "matchStage": function(match) {
                 if (match.type == "regular season") {
