@@ -21,36 +21,44 @@
         </style>
 
         <h5>Regions</h5>
-        <template repeat="{{region in regions}}">
-            <core-label horizontal layout>
-                <paper-checkbox for checked data-region-id="{{region.id}}" on-change="{{changeSelections}}"></paper-checkbox>
-                <p>{{region.name}}</p>
-            </core-label>
-        </template>
+        <div id="regions">
+            <template repeat="{{region in regions}}">
+                <core-label horizontal layout>
+                    <paper-checkbox for checked data-region-id="{{region.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                    <p>{{region.name}}</p>
+                </core-label>
+            </template>
+        </div>
 
         <h5>Games</h5>
-        <template repeat="{{game in games}}">
-            <core-label horizontal layout>
-                <paper-checkbox for checked data-game-id="{{game.id}}" on-change="{{changeSelections}}"></paper-checkbox>
-                <p>{{game.name}}</p>
-            </core-label>
-        </template>
+        <div id="games">
+            <template repeat="{{game in games}}">
+                <core-label horizontal layout>
+                    <paper-checkbox for checked data-game-id="{{game.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                    <p>{{game.name}}</p>
+                </core-label>
+            </template>
+        </div>
 
         <h5>Divisions</h5>
-        <template repeat="{{division in divisions}}">
-            <core-label horizontal layout>
-                <paper-checkbox for checked data-division-id="{{division.id}}" on-change="{{changeSelections}}"></paper-checkbox>
-                <p>{{division.name}}</p>
-            </core-label>
-        </template>
+        <div id="divisions">
+            <template repeat="{{division in divisions}}">
+                <core-label horizontal layout>
+                    <paper-checkbox for checked data-division-id="{{division.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                    <p>{{division.name}}</p>
+                </core-label>
+            </template>
+        </div>
 
         <h5>Statuses</h5>
-        <template repeat="{{status in statuses}}">
-            <core-label horizontal layout>
-                <paper-checkbox for checked data-status-id="{{status.id}}" on-change="{{changeSelections}}"></paper-checkbox>
-                <p>{{status.name}}</p>
-            </core-label>
-        </template>
+        <div id="statuses">
+            <template repeat="{{status in statuses}}">
+                <core-label horizontal layout>
+                    <paper-checkbox for checked data-status-id="{{status.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                    <p>{{status.name}}</p>
+                </core-label>
+            </template>
+        </div>
 
         <h5>Date Range</h5>
         <h6>Start</h6>
