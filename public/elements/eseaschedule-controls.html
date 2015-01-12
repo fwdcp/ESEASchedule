@@ -20,78 +20,56 @@
             }
         </style>
 
-        <div class="row">
-            <div id="regions" class="col s12 m2">
-                <h5>Regions</h5>
+        <h5>Regions</h5>
+        <template repeat="{{region in regions}}">
+            <core-label horizontal layout>
+                <paper-checkbox for checked data-region-id="{{region.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                <p>{{region.name}}</p>
+            </core-label>
+        </template>
 
-                <template repeat="{{region in regions}}">
-                    <core-label horizontal layout>
-                        <paper-checkbox for checked data-region-id="{{region.id}}" on-change="{{changeSelections}}"></paper-checkbox>
-                        <p>{{region.name}}</p>
-                    </core-label>
-                </template>
-            </div>
+        <h5>Games</h5>
+        <template repeat="{{game in games}}">
+            <core-label horizontal layout>
+                <paper-checkbox for checked data-game-id="{{game.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                <p>{{game.name}}</p>
+            </core-label>
+        </template>
 
-            <div id="games" class="col s12 m2">
-                <h5>Games</h5>
+        <h5>Divisions</h5>
+        <template repeat="{{division in divisions}}">
+            <core-label horizontal layout>
+                <paper-checkbox for checked data-division-id="{{division.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                <p>{{division.name}}</p>
+            </core-label>
+        </template>
 
-                <template repeat="{{game in games}}">
-                    <core-label horizontal layout>
-                        <paper-checkbox for checked data-game-id="{{game.id}}" on-change="{{changeSelections}}"></paper-checkbox>
-                        <p>{{game.name}}</p>
-                    </core-label>
-                </template>
-            </div>
+        <h5>Statuses</h5>
+        <template repeat="{{status in statuses}}">
+            <core-label horizontal layout>
+                <paper-checkbox for checked data-status-id="{{status.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                <p>{{status.name}}</p>
+            </core-label>
+        </template>
 
-            <div id="divisions" class="col s12 m2">
-                <h5>Divisions</h5>
+        <h5>Date Range</h5>
+        <h6>Start</h6>
+        <paper-input-decorator label="Start Date">
+            <input is="core-input" type="date" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" id="startDate" on-change="{{changeSelections}}"></input>
+        </paper-input-decorator>
+        <h6>End</h6>
+        <paper-input-decorator label="End Date">
+            <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" id="endDate" on-change="{{changeSelections}}"></input>
+        </paper-input-decorator>
 
-                <template repeat="{{division in divisions}}">
-                    <core-label horizontal layout>
-                        <paper-checkbox for checked data-division-id="{{division.id}}" on-change="{{changeSelections}}"></paper-checkbox>
-                        <p>{{division.name}}</p>
-                    </core-label>
-                </template>
-            </div>
-
-            <div id="statuses" class="col s12 m2">
-                <h5>Statuses</h5>
-
-                <template repeat="{{status in statuses}}">
-                    <core-label horizontal layout>
-                        <paper-checkbox for checked data-status-id="{{status.id}}" on-change="{{changeSelections}}"></paper-checkbox>
-                        <p>{{status.name}}</p>
-                    </core-label>
-                </template>
-            </div>
-
-            <div class="col s12 m2">
-                <h5>Date Range</h5>
-
-                <h6>Start</h6>
-                <paper-input-decorator label="Start Date">
-                    <input is="core-input" type="date" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" id="startDate" on-change="{{changeSelections}}"></input>
-                </paper-input-decorator>
-
-                <h6>End</h6>
-                <paper-input-decorator label="End Date">
-                    <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" id="endDate" on-change="{{changeSelections}}"></input>
-                </paper-input-decorator>
-            </div>
-
-            <div class="col s12 m2">
-                <h5>Options</h5>
-
-                <div center horizontal layout>
-                    <div flex>Show Scores</div>
-                    <paper-toggle-button checked?="{{showScores}}" id="showScores" on-change="{{changeSelections}}"></paper-toggle-button>
-                </div>
-
-                <div center horizontal layout>
-                    <div flex>Show Team Information</div>
-                    <paper-toggle-button checked?="{{showTeamInfo}}" id="showTeamInfo" on-change="{{changeSelections}}"></paper-toggle-button>
-                </div>
-            </div>
+        <h5>Options</h5>
+        <div center horizontal layout>
+            <div flex>Show Scores</div>
+            <paper-toggle-button checked?="{{showScores}}" id="showScores" on-change="{{changeSelections}}"></paper-toggle-button>
+        </div>
+        <div center horizontal layout>
+            <div flex>Show Team Information</div>
+            <paper-toggle-button checked?="{{showTeamInfo}}" id="showTeamInfo" on-change="{{changeSelections}}"></paper-toggle-button>
         </div>
 
         <core-ajax

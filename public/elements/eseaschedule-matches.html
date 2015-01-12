@@ -8,65 +8,61 @@
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
 
-        <div class="row">
-            <div class="col s12">
-                <template repeat="{{match in matches}}">
-                    <div class="{{ {'card': true, 'amber': match.state == 'pending', 'light-blue': match.state == 'upcoming', 'light-green': match.state == 'live', 'teal': match.state == 'completed' && match.outcome_type == 'normal', 'pink': match.state == 'completed' && match.outcome_type != 'normal'} | tokenList}}">
-                        <div class="card-content white-text">
-                            <span class="card-title">
-                                <core-icon src="/img/esea_games/{{match.game_icon}}"></core-icon>
-                                S{{match.season}} {{match.game_abbr}} {{match.region_abbr}} {{match.division_level | capitalizeFirstLetter}} {{match | matchStage}}: {{match.team_1_name}} vs. {{match.team_2_name}}
-                            </span>
-                            <p>
-                                <strong>Status:</strong> {{match.state | capitalizeFirstLetter}}
-                                <template if="{{match.state == 'completed' && match.outcome_type != 'normal'}}">
-                                    ({{match.outcome_type | capitalizeFirstLetter}})
-                                </template>
-                                <template if="{{match.period}}">
-                                    ({{match.period}})
-                                </template>
-                            </p>
-                            <p>
-                                <strong>Time:</strong> {{match.date | formatMatchTime}}
-                            </p>
-                            <p>
-                                <strong>Map:</strong> {{match.map_name}}
-                            </p>
-                            <template if="{{showTeamInfo}}">
-                                <p>
-                                    <strong>Team 1:</strong> #{{match.team_1_seed}} <img src="/img/countries/{{match.team_1_country_abbr | toLowerCase}}.png" /> {{match.team_1_name}}
-                                    <template if="{{match.type == 'regular season'}}">
-                                        ({{match.team_1_wins}}-{{match.team_1_losses}}-{{match.team_1_ties}})
-                                    </template>
-                                </p>
-                                <p>
-                                    <strong>Team 2:</strong> #{{match.team_2_seed}} <img src="/img/countries/{{match.team_2_country_abbr | toLowerCase}}.png" /> {{match.team_2_name}}
-                                    <template if="{{match.type == 'regular season'}}">
-                                        ({{match.team_2_wins}}-{{match.team_2_losses}}-{{match.team_2_ties}})
-                                    </template>
-                                </p>
+        <template repeat="{{match in matches}}">
+            <div class="{{ {'card': true, 'amber': match.state == 'pending', 'light-blue': match.state == 'upcoming', 'light-green': match.state == 'live', 'teal': match.state == 'completed' && match.outcome_type == 'normal', 'pink': match.state == 'completed' && match.outcome_type != 'normal'} | tokenList}}">
+                <div class="card-content white-text">
+                    <span class="card-title">
+                        <core-icon src="/img/esea_games/{{match.game_icon}}"></core-icon>
+                        S{{match.season}} {{match.game_abbr}} {{match.region_abbr}} {{match.division_level | capitalizeFirstLetter}} {{match | matchStage}}: {{match.team_1_name}} vs. {{match.team_2_name}}
+                    </span>
+                    <p>
+                        <strong>Status:</strong> {{match.state | capitalizeFirstLetter}}
+                        <template if="{{match.state == 'completed' && match.outcome_type != 'normal'}}">
+                            ({{match.outcome_type | capitalizeFirstLetter}})
+                        </template>
+                        <template if="{{match.period}}">
+                            ({{match.period}})
+                        </template>
+                    </p>
+                    <p>
+                        <strong>Time:</strong> {{match.date | formatMatchTime}}
+                    </p>
+                    <p>
+                        <strong>Map:</strong> {{match.map_name}}
+                    </p>
+                    <template if="{{showTeamInfo}}">
+                        <p>
+                            <strong>Team 1:</strong> #{{match.team_1_seed}} <img src="/img/countries/{{match.team_1_country_abbr | toLowerCase}}.png" /> {{match.team_1_name}}
+                            <template if="{{match.type == 'regular season'}}">
+                                ({{match.team_1_wins}}-{{match.team_1_losses}}-{{match.team_1_ties}})
                             </template>
-                            <template if="{{showScores && (match.team_1_scores.t || match.team_2_scores.t)}}">
-                                <p>
-                                    <strong>Score:</strong> {{match.team_1_scores.t}}-{{match.team_2_scores.t}}
-                                </p>
+                        </p>
+                        <p>
+                            <strong>Team 2:</strong> #{{match.team_2_seed}} <img src="/img/countries/{{match.team_2_country_abbr | toLowerCase}}.png" /> {{match.team_2_name}}
+                            <template if="{{match.type == 'regular season'}}">
+                                ({{match.team_2_wins}}-{{match.team_2_losses}}-{{match.team_2_ties}})
                             </template>
-                        </div>
-                        <div class="card-action">
-                            <a href="http://play.esea.net/index.php?s=stats&d=match&id={{match.id}}">Match Page</a>
-                            <template if="{{match.state == 'live' && match.spectv_slave_host}}">
-                                <a href="steam://connect/{{match.spectv_slave_host}}:{{match.spectv_slave_port}}">Match TV</a>
-                            </template>
-                            <template if="{{match.state == 'completed' && +match.spectv_demo_id}}">
-                                <a href="http://play.esea.net/index.php?s=servers&d=download_replay&id={{match.spectv_demo_id}}">Match Demo</a>
-                            </template>
-                            <a href="http://play.esea.net/teams/{{match.entity_1_id}}">{{match.team_1_name}}</a>
-                            <a href="http://play.esea.net/teams/{{match.entity_2_id}}">{{match.team_2_name}}</a>
-                        </div>
-                    </div>
-                </template>
+                        </p>
+                    </template>
+                    <template if="{{showScores && (match.team_1_scores.t || match.team_2_scores.t)}}">
+                        <p>
+                            <strong>Score:</strong> {{match.team_1_scores.t}}-{{match.team_2_scores.t}}
+                        </p>
+                    </template>
+                </div>
+                <div class="card-action">
+                    <a href="http://play.esea.net/index.php?s=stats&d=match&id={{match.id}}">Match Page</a>
+                    <template if="{{match.state == 'live' && match.spectv_slave_host}}">
+                        <a href="steam://connect/{{match.spectv_slave_host}}:{{match.spectv_slave_port}}">Match TV</a>
+                    </template>
+                    <template if="{{match.state == 'completed' && +match.spectv_demo_id}}">
+                        <a href="http://play.esea.net/index.php?s=servers&d=download_replay&id={{match.spectv_demo_id}}">Match Demo</a>
+                    </template>
+                    <a href="http://play.esea.net/teams/{{match.entity_1_id}}">{{match.team_1_name}}</a>
+                    <a href="http://play.esea.net/teams/{{match.entity_2_id}}">{{match.team_2_name}}</a>
+                </div>
             </div>
-        </div>
+        </template>
     </template>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>

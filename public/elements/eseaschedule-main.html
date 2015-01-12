@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../bower_components/core-drawer-panel/core-drawer-panel.html">
 <link rel="import" href="eseaschedule-controls.html">
 <link rel="import" href="eseaschedule-matches.html">
 
@@ -7,8 +8,14 @@
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
 
-        <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
-        <eseaschedule-matches id="matches"></eseaschedule-matches>
+        <core-drawer-panel>
+            <div drawer>
+                <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
+            </div>
+            <div main>
+                <eseaschedule-matches id="matches"></eseaschedule-matches>
+            </div>
+        </core-drawer-panel>
 
         <core-ajax
         url="/matches/{{startDate | dateValueFormatter}}/{{endDate | dateValueFormatter}}/list.json"
