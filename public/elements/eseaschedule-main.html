@@ -91,8 +91,52 @@
             }, this);
 
             matches = _.sortBy(matches, function(match) {
+                if (match.division_level == 'invite') {
+                    return 1;
+                }
+                else if (match.division_level == 'premier') {
+                    return 2;
+                }
+                else if (match.division_level == 'main') {
+                    return 3;
+                }
+                else if (match.division_level == 'intermediate') {
+                    return 4;
+                }
+                else if (match.division_level == 'open') {
+                    return 5;
+                }
+            });
+
+            matches = _.sortBy(matches, function(match) {
+                return match.region_id;
+            });
+
+            matches = _.sortBy(matches, function(match) {
+                return match.game_id;
+            });
+
+            matches = _.sortBy(matches, function(match) {
                 return +match.date;
-            })
+            });
+
+            matches = _.sortBy(matches, function(match) {
+                if (match.state == 'live') {
+                    return 1;
+                }
+                else if (match.state == 'upcoming') {
+                    return 2;
+                }
+                else if (match.state == 'completed' && match.outcome_type == 'normal') {
+                    return 3;
+                }
+                else if (match.state == 'pending') {
+                    return 4;
+                }
+                else {
+                    return 5;
+                }
+            });
 
             this.$.matches.matches = matches;
             this.$.matches.showScores = this.showScores;
