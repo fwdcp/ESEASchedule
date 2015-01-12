@@ -4,7 +4,7 @@
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
 
-<polymer-element name="eseaschedule-matches" attributes="matches">
+<polymer-element name="eseaschedule-matches" attributes="matches showScores">
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
 
@@ -15,11 +15,8 @@
                         <div class="card-content white-text">
                             <span class="card-title">
                                 <core-icon src="/img/esea_games/{{match.game_icon}}"></core-icon>
-                                S{{match.season}} {{match.game_abbr}} {{match.region_abbr}} {{match.division_level | capitalizeFirstLetter}} {{match | matchStage}}: #{{match.team_1_seed}} {{match.team_1_name}} vs. #{{match.team_2_seed}} {{match.team_2_name}}
+                                S{{match.season}} {{match.game_abbr}} {{match.region_abbr}} {{match.division_level | capitalizeFirstLetter}} {{match | matchStage}}: {{match.team_1_name}} vs. {{match.team_2_name}}
                             </span>
-                            <p>
-                                <strong>Time:</strong> {{match.date | formatMatchTime}}
-                            </p>
                             <p>
                                 <strong>Status:</strong> {{match.state | capitalizeFirstLetter}}
                                 <template if="{{match.state == 'completed' && match.outcome_type != 'normal'}}">
@@ -28,6 +25,12 @@
                                 <template if="{{match.period}}">
                                     ({{match.period}})
                                 </template>
+                            </p>
+                            <p>
+                                <strong>Time:</strong> {{match.date | formatMatchTime}}
+                            </p>
+                            <p>
+                                <strong>Map:</strong> {{match.map_name}}
                             </p>
                             <p>
                                 <strong>Team 1:</strong> #{{match.team_1_seed}} <img src="/img/countries/{{match.team_1_country_abbr | toLowerCase}}.png" /> {{match.team_1_name}}
@@ -41,7 +44,7 @@
                                     ({{match.team_2_wins}}-{{match.team_2_losses}}-{{match.team_2_ties}})
                                 </template>
                             </p>
-                            <template if="{{match.team_1_scores.t || match.team_2_scores.t}}">
+                            <template if="{{showScores && (match.team_1_scores.t || match.team_2_scores.t)}}">
                                 <p>
                                     <strong>Score:</strong> {{match.team_1_scores.t}}-{{match.team_2_scores.t}}
                                 </p>

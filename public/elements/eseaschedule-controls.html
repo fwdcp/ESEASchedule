@@ -4,7 +4,7 @@
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
 
-<polymer-element name="eseaschedule-controls" attributes="startDate endDate selectedRegions selectedGames selectedDivisions selectedStatuses">
+<polymer-element name="eseaschedule-controls" attributes="startDate endDate selectedRegions selectedGames selectedDivisions selectedStatuses showScores">
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
         <style>
@@ -74,6 +74,15 @@
                     <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" id="endDate" on-change="{{changeSelections}}"></input>
                 </paper-input-decorator>
             </div>
+
+            <div class="col s12 m2">
+                <h5>Options</h5>
+
+                <core-label horizontal layout>
+                    <p>Show Scores</p>
+                    <paper-toggle-button for checked?="{{showScores}}" on-change="{{changeSelections}}"></paper-toggle-button>
+                </core-label>
+            </div>
         </div>
 
         <core-ajax
@@ -100,6 +109,7 @@
             "selectedGames": [],
             "selectedDivisions": [],
             "selectedStatuses": ["pending", "upcoming", "live", "completedNormal", "completedSpecial"],
+            "showScores": false,
             "getFilters": function(event, detail, sender) {
                 if (sender.response) {
                     this.regions = sender.response.regions;

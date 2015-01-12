@@ -7,8 +7,8 @@
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
 
-        <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
-        <eseaschedule-matches id="matches"></eseaschedule-matches>
+        <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
+        <eseaschedule-matches showScores="{{showScores}}" id="matches"></eseaschedule-matches>
 
         <core-ajax
         url="/matches/{{startDate | dateValueFormatter}}/{{endDate | dateValueFormatter}}/list.json"
