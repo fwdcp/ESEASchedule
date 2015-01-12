@@ -1,14 +1,26 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../bower_components/core-drawer-panel/core-drawer-panel.html">
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="eseaschedule-controls.html">
 <link rel="import" href="eseaschedule-matches.html">
 
 <polymer-element name="eseaschedule-main">
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
+        <style>
+            div[drawer], div[main] {
+                padding: 20px;
+                overflow: scroll;
+            }
+        </style>
 
-        <core-drawer-panel>
+        <core-toolbar>
+            <paper-icon-button icon="menu" on-click="{{$.main.togglePanel}}"></core-icon-button>
+            <span flex>ESEA Schedule</span>
+        </core-toolbar>
+        <core-drawer-panel id="main">
             <div drawer>
                 <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
             </div>
