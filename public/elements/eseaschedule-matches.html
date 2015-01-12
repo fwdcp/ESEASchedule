@@ -12,7 +12,7 @@
             <div class="col s12">
                 <template repeat="{{match in matches}}">
                     <div class="{{ {'card': true, 'amber': match.state == 'pending', 'light-blue': match.state == 'upcoming', 'light-green': match.state == 'live', 'teal': match.state == 'completed' && match.outcome_type == 'normal', 'pink': match.state == 'completed' && match.outcome_type != 'normal'} | tokenList}}">
-                        <div class="card-content">
+                        <div class="card-content white-text">
                             <span class="card-title">
                                 <core-icon src="/img/esea_games/{{match.game_icon}}"></core-icon>
                                 S{{match.season}} {{match.game_abbr}} {{match.region_abbr}} {{match.division_level | capitalizeFirstLetter}} {{match | matchStage}}: #{{match.team_1_seed}} {{match.team_1_name}} vs. #{{match.team_2_seed}} {{match.team_2_name}}
@@ -38,19 +38,21 @@
                                     ({{match.team_2_wins}}-{{match.team_2_losses}}-{{match.team_2_ties}})
                                 </template>
                             </p>
-                            <template if="{{match.state == 'live' || (match.state == 'completed' && match.outcome_type == 'normal')}}">
+                            <template if="{{match.team_1_scores.t || match.team_2_scores.t}}">
                                 <p>
-                                    <strong>Score:</strong> {{+match.team_1_scores.t}}-{{+match.team_2_scores.t}}
+                                    <strong>Score:</strong> {{match.team_1_scores.t}}-{{match.team_2_scores.t}}
                                 </p>
                             </template>
-                            <div class="card-action">
-                                <template if="{{match.state == 'live' && match.spectv_slave_host}}">
-                                    <a href="steam://connect/{{match.spectv_slave_host}}:{{match.spectv_slave_port}}">Match TV</a></p>
-                                </template>
-                                <template if="{{match.state == 'completed' && +match.spectv_demo_id}}">
-                                    <a href="http://play.esea.net/index.php?s=servers&d=download_replay&id={{match.spectv_demo_id}}">Match Demo</a></p>
-                                </template>
-                            </div>
+                            <template if="{{(match.state == 'live' && match.spectv_slave_host) || (match.state == 'completed' && +match.spectv_demo_id)}}">
+                                <div class="card-action">
+                                    <template if="{{match.state == 'live' && match.spectv_slave_host}}">
+                                        <a href="steam://connect/{{match.spectv_slave_host}}:{{match.spectv_slave_port}}">Match TV</a>
+                                    </template>
+                                    <template if="{{match.state == 'completed' && +match.spectv_demo_id}}">
+                                        <a href="http://play.esea.net/index.php?s=servers&d=download_replay&id={{match.spectv_demo_id}}">Match Demo</a>
+                                    </template>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </template>
