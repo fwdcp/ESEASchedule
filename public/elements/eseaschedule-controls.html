@@ -105,9 +105,15 @@
                     this.regions = sender.response.regions;
                     this.games = sender.response.games;
                     this.divisions = sender.response.divisions;
-                    this.selectedRegions = sender.response.regions;
-                    this.selectedGames = sender.response.games;
-                    this.selectedDivisions = sender.response.divisions;
+                    this.selectedRegions = _.map(sender.response.regions, function(value) {
+                        return value.id;
+                    });
+                    this.selectedGames = _.map(sender.response.games, function(value) {
+                        return value.id;
+                    });
+                    this.selectedDivisions = _.map(sender.response.divisions, function(value) {
+                        return value.id;
+                    });
                     this.startDate = new Date(sender.response.weekBegin);
                     this.endDate = new Date(sender.response.weekEnd);
                     this.oldestDate = new Date(sender.response.oldestDate);
