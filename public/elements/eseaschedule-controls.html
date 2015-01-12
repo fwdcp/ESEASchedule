@@ -20,16 +20,6 @@
             }
         </style>
 
-        <h5>Regions</h5>
-        <div id="regions">
-            <template repeat="{{region in regions}}">
-                <core-label horizontal layout>
-                    <paper-checkbox for checked data-region-id="{{region.id}}" on-change="{{changeSelections}}"></paper-checkbox>
-                    <p>{{region.name}}</p>
-                </core-label>
-            </template>
-        </div>
-
         <h5>Date Range</h5>
         <h6>Start</h6>
         <paper-input-decorator label="Start Date">
@@ -39,6 +29,16 @@
         <paper-input-decorator label="End Date">
             <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" id="endDate" on-change="{{changeSelections}}"></input>
         </paper-input-decorator>
+
+        <h5>Regions</h5>
+        <div id="regions">
+            <template repeat="{{region in regions}}">
+                <core-label horizontal layout>
+                    <paper-checkbox for checked data-region-id="{{region.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                    <p>{{region.name}}</p>
+                </core-label>
+            </template>
+        </div>
 
         <h5>Games</h5>
         <div id="games">
