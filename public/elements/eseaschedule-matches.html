@@ -18,6 +18,15 @@
                                 S{{match.season}} {{match.game_abbr}} {{match.region_abbr}} {{match.division_level | capitalizeFirstLetter}} {{match | matchStage}}: #{{match.team_1_seed}} {{match.team_1_name}} vs. #{{match.team_2_seed}} {{match.team_2_name}}
                             </span>
                             <p>
+                                <strong>Match Time:</strong> {{match.date | formatMatchTime}}
+                                <template if="{{match.state == 'completed' && match.outcome_type != 'normal'}}">
+                                    ({{match.outcome_type | capitalizeFirstLetter}})
+                                </template>
+                                <template if="{{match.period}}">
+                                    ({{match.period}})
+                                </template>
+                            </p>
+                            <p>
                                 <strong>Status:</strong> {{match.state | capitalizeFirstLetter}}
                                 <template if="{{match.state == 'completed' && match.outcome_type != 'normal'}}">
                                     ({{match.outcome_type | capitalizeFirstLetter}})
@@ -46,18 +55,23 @@
                         </div>
                         <div class="card-action">
                             <a href="http://play.esea.net/index.php?s=stats&d=match&id={{match.id}}">Match Page</a>
+                            <a href="http://play.esea.net/index.php?s=stats&d=match&id={{match.id}}">Match Page</a>
                             <template if="{{match.state == 'live' && match.spectv_slave_host}}">
                                 <a href="steam://connect/{{match.spectv_slave_host}}:{{match.spectv_slave_port}}">Match TV</a>
                             </template>
                             <template if="{{match.state == 'completed' && +match.spectv_demo_id}}">
                                 <a href="http://play.esea.net/index.php?s=servers&d=download_replay&id={{match.spectv_demo_id}}">Match Demo</a>
                             </template>
+                            <a href=http://play.esea.net/teams/{{match.entity_1_id}}">{{match.team_1_name}}</a>
+                            <a href=http://play.esea.net/teams/{{match.entity_2_id}}">{{match.team_2_name}}</a>
                         </div>
                     </div>
                 </template>
             </div>
         </div>
     </template>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 
     <script>
         Polymer({
@@ -74,6 +88,9 @@
                 else if (match.type == "post-season") {
                     return "Playoffs R" + match.round;
                 }
+            },
+            "formatMatchTime": function(unixtime) {
+                return moment.unix(unixtime).format("LLLL") + " (" + moment.unix(unixtime).fromNow() + ")";
             }
         });
     </script>
