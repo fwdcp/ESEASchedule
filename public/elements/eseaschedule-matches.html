@@ -4,7 +4,7 @@
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
 
-<polymer-element name="eseaschedule-matches" attributes="matches showScores">
+<polymer-element name="eseaschedule-matches" attributes="matches showScores showTeamInfo">
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
 
@@ -32,18 +32,20 @@
                             <p>
                                 <strong>Map:</strong> {{match.map_name}}
                             </p>
-                            <p>
-                                <strong>Team 1:</strong> #{{match.team_1_seed}} <img src="/img/countries/{{match.team_1_country_abbr | toLowerCase}}.png" /> {{match.team_1_name}}
-                                <template if="{{match.type == 'regular season'}}">
-                                    ({{match.team_1_wins}}-{{match.team_1_losses}}-{{match.team_1_ties}})
-                                </template>
-                            </p>
-                            <p>
-                                <strong>Team 2:</strong> #{{match.team_2_seed}} <img src="/img/countries/{{match.team_2_country_abbr | toLowerCase}}.png" /> {{match.team_2_name}}
-                                <template if="{{match.type == 'regular season'}}">
-                                    ({{match.team_2_wins}}-{{match.team_2_losses}}-{{match.team_2_ties}})
-                                </template>
-                            </p>
+                            <template if="{{showTeamInfo}}">
+                                <p>
+                                    <strong>Team 1:</strong> #{{match.team_1_seed}} <img src="/img/countries/{{match.team_1_country_abbr | toLowerCase}}.png" /> {{match.team_1_name}}
+                                    <template if="{{match.type == 'regular season'}}">
+                                        ({{match.team_1_wins}}-{{match.team_1_losses}}-{{match.team_1_ties}})
+                                    </template>
+                                </p>
+                                <p>
+                                    <strong>Team 2:</strong> #{{match.team_2_seed}} <img src="/img/countries/{{match.team_2_country_abbr | toLowerCase}}.png" /> {{match.team_2_name}}
+                                    <template if="{{match.type == 'regular season'}}">
+                                        ({{match.team_2_wins}}-{{match.team_2_losses}}-{{match.team_2_ties}})
+                                    </template>
+                                </p>
+                            </template>
                             <template if="{{showScores && (match.team_1_scores.t || match.team_2_scores.t)}}">
                                 <p>
                                     <strong>Score:</strong> {{match.team_1_scores.t}}-{{match.team_2_scores.t}}

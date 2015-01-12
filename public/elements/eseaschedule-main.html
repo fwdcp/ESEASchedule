@@ -7,7 +7,7 @@
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
 
-        <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
+        <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
         <eseaschedule-matches id="matches"></eseaschedule-matches>
 
         <core-ajax
@@ -24,6 +24,7 @@
     Polymer({
         "matches": [],
         "showScores": false,
+        "showTeamInfo": false,
         "dateValueFormatter": function(value) {
             return moment(value).format("YYYY-MM-DD");
         },
@@ -61,6 +62,7 @@
 
             this.$.matches.matches = matches;
             this.$.matches.showScores = this.showScores;
+            this.$.matches.showTeamInfo = this.showTeamInfo;
         }
     });
     </script>

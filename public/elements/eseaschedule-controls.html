@@ -5,7 +5,7 @@
 <link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
 <link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
 
-<polymer-element name="eseaschedule-controls" attributes="startDate endDate selectedRegions selectedGames selectedDivisions selectedStatuses showScores">
+<polymer-element name="eseaschedule-controls" attributes="startDate endDate selectedRegions selectedGames selectedDivisions selectedStatuses showScores showTeamInfo">
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
         <style>
@@ -79,10 +79,15 @@
             <div class="col s12 m2">
                 <h5>Options</h5>
 
-                <core-label horizontal layout>
-                    <p>Show Scores</p>
-                    <paper-toggle-button for checked?="{{showScores}}" id="showScores" on-change="{{changeSelections}}"></paper-toggle-button>
-                </core-label>
+                <div center horizontal layout>
+                    <div flex>Show Scores</div>
+                    <paper-toggle-button checked?="{{showScores}}" id="showScores" on-change="{{changeSelections}}"></paper-toggle-button>
+                </div>
+
+                <div center horizontal layout>
+                    <div flex>Show Team Information</div>
+                    <paper-toggle-button checked?="{{showTeamInfo}}" id="showTeamInfo" on-change="{{changeSelections}}"></paper-toggle-button>
+                </div>
             </div>
         </div>
 
@@ -111,6 +116,7 @@
             "selectedDivisions": [],
             "selectedStatuses": ["pending", "upcoming", "live", "completedNormal", "completedSpecial"],
             "showScores": false,
+            "showTeamInfo": false,
             "getFilters": function(event, detail, sender) {
                 if (sender.response) {
                     this.regions = sender.response.regions;
@@ -152,6 +158,7 @@
                 });
 
                 this.showScores = this.$.showScores.checked;
+                this.showTeamInfo = this.$.showTeamInfo.checked;
 
                 this.fire('selections-changed');
             }
