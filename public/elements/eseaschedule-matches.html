@@ -27,13 +27,13 @@
                                 </template>
                             </p>
                             <p>
-                                <strong>Team 1:</strong> <img src="/img/countries/{{match.team_1_country_abbr | toLowerCase}}.png" /> #{{match.team_1_seed}} {{match.team_1_name}}
+                                <strong>Team 1:</strong> #{{match.team_1_seed}} <img src="/img/countries/{{match.team_1_country_abbr | toLowerCase}}.png" /> {{match.team_1_name}}
                                 <template if="{{match.type == 'regular season'}}">
                                     ({{match.team_1_wins}}-{{match.team_1_losses}}-{{match.team_1_ties}})
                                 </template>
                             </p>
                             <p>
-                                <strong>Team 2:</strong> <img src="/img/countries/{{match.team_2_country_abbr | toLowerCase}}.png" /> #{{match.team_2_seed}} {{match.team_2_name}}
+                                <strong>Team 2:</strong> #{{match.team_2_seed}} <img src="/img/countries/{{match.team_2_country_abbr | toLowerCase}}.png" /> {{match.team_2_name}}
                                 <template if="{{match.type == 'regular season'}}">
                                     ({{match.team_2_wins}}-{{match.team_2_losses}}-{{match.team_2_ties}})
                                 </template>
