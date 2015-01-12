@@ -28,26 +28,28 @@
         },
         "updateMatches": function(event, detail, sender) {
             if (sender.response) {
-                var matches = sender.response;
-
-                matches = _.filter(matches, function(match) {
-                    return _.contains(this.selectedRegions, match.region_id);
-                }, this);
-
-                matches = _.filter(matches, function(match) {
-                    return _.contains(this.selectedGames, match.game_id);
-                }, this);
-
-                matches = _.filter(matches, function(match) {
-                    return _.contains(this.selectedDivisions, match.division_level);
-                }, this);
-
-                matches = _.sortBy(matches, function(match) {
-                    return +match.date;
-                })
-
-                this.$.matches.matches = matches;
+                this.matches = sender.response;
             }
+
+            var matches = this.matches;
+
+            matches = _.filter(matches, function(match) {
+                return _.contains(this.selectedRegions, match.region_id);
+            }, this);
+
+            matches = _.filter(matches, function(match) {
+                return _.contains(this.selectedGames, match.game_id);
+            }, this);
+
+            matches = _.filter(matches, function(match) {
+                return _.contains(this.selectedDivisions, match.division_level);
+            }, this);
+
+            matches = _.sortBy(matches, function(match) {
+                return +match.date;
+            })
+
+            this.$.matches.matches = matches;
         }
     });
     </script>
