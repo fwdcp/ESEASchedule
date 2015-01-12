@@ -45,6 +45,15 @@
                 return _.contains(this.selectedDivisions, match.division_level);
             }, this);
 
+            matches = _.filter(matches, function(match) {
+                if (match.state == 'completed') {
+                    return (match.outcome_type == 'normal' && _.contains(this.selectedStatuses, 'completedNormal')) || (match.outcome_type != 'normal' && _.contains(this.selectedStatuses, 'completedSpecial'));
+                }
+                else {
+                    return _.contains(this.selectedStatuses, match.state);
+                }
+            }, this);
+
             matches = _.sortBy(matches, function(match) {
                 return +match.date;
             })
