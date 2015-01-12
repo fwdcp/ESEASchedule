@@ -45,6 +45,7 @@
         url="/matches/{{startDate | dateValueFormatter}}/{{endDate | dateValueFormatter}}/list.json"
         handleAs="json"
         auto
+        id="matchAPI"
         on-core-response="{{updateMatches}}"
         on-core-error="{{retrievalError}}"></core-ajax>
     </template>
