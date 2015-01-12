@@ -15,11 +15,14 @@
                 padding: 20px;
                 overflow: auto;
             }
+            [drawer] {
+                background: white;
+            }
         </style>
 
         <core-header-panel flex>
             <core-toolbar>
-                <paper-icon-button icon="menu" on-click="{{toggleControls}}"></core-icon-button>
+                <paper-icon-button icon="menu" core-drawer-toggle></core-icon-button>
                 <span flex>ESEA Schedule</span>
             </core-toolbar>
             <core-drawer-panel id="main">
@@ -85,9 +88,6 @@
             this.$.matches.matches = matches;
             this.$.matches.showScores = this.showScores;
             this.$.matches.showTeamInfo = this.showTeamInfo;
-        },
-        "toggleControls": function(event, detail, sender) {
-            this.$.main.togglePanel();
         }
     });
     </script>
