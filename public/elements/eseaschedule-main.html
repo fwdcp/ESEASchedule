@@ -22,10 +22,12 @@
 
         <core-header-panel flex>
             <core-toolbar>
-                <paper-icon-button icon="menu" on-click="{{toggleControls}}"></core-icon-button>
+                <template if="{{narrow}}">
+                    <paper-icon-button icon="menu" on-click="{{toggleControls}}"></core-icon-button>
+                </template>
                 <span flex>ESEA Schedule</span>
             </core-toolbar>
-            <core-drawer-panel id="main">
+            <core-drawer-panel narrow="{{narrow}}" id="main">
                 <div drawer>
                     <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
                 </div>
