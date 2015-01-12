@@ -42,7 +42,7 @@
                     return _.contains(this.selectedDivisions, match.division_level);
                 }, this);
 
-                matches = _.sort(matches, function(match) {
+                matches = _.sortBy(matches, function(match) {
                     return +match.date;
                 })
 
