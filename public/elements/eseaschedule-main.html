@@ -11,15 +11,15 @@
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
         <style>
-            div[drawer], div[main] {
+            [drawer], [main] {
                 padding: 20px;
-                overflow: scroll;
+                overflow: auto;
             }
         </style>
 
         <core-header-panel flex>
             <core-toolbar>
-                <paper-icon-button icon="menu" on-click="{{$.main.togglePanel}}"></core-icon-button>
+                <paper-icon-button icon="menu" on-click="{{toggleControls}}"></core-icon-button>
                 <span flex>ESEA Schedule</span>
             </core-toolbar>
             <core-drawer-panel id="main">
@@ -85,6 +85,9 @@
             this.$.matches.matches = matches;
             this.$.matches.showScores = this.showScores;
             this.$.matches.showTeamInfo = this.showTeamInfo;
+        },
+        "toggleControls": function(event, detail, sender) {
+            $.main.togglePanel();
         }
     });
     </script>

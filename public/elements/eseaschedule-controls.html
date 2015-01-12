@@ -30,6 +30,16 @@
             </template>
         </div>
 
+        <h5>Date Range</h5>
+        <h6>Start</h6>
+        <paper-input-decorator label="Start Date">
+            <input is="core-input" type="date" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" id="startDate" on-change="{{changeSelections}}"></input>
+        </paper-input-decorator>
+        <h6>End</h6>
+        <paper-input-decorator label="End Date">
+            <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" id="endDate" on-change="{{changeSelections}}"></input>
+        </paper-input-decorator>
+
         <h5>Games</h5>
         <div id="games">
             <template repeat="{{game in games}}">
@@ -59,16 +69,6 @@
                 </core-label>
             </template>
         </div>
-
-        <h5>Date Range</h5>
-        <h6>Start</h6>
-        <paper-input-decorator label="Start Date">
-            <input is="core-input" type="date" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" id="startDate" on-change="{{changeSelections}}"></input>
-        </paper-input-decorator>
-        <h6>End</h6>
-        <paper-input-decorator label="End Date">
-            <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" id="endDate" on-change="{{changeSelections}}"></input>
-        </paper-input-decorator>
 
         <h5>Options</h5>
         <div center horizontal layout>
