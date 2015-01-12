@@ -18,13 +18,7 @@
                                 S{{match.season}} {{match.game_abbr}} {{match.region_abbr}} {{match.division_level | capitalizeFirstLetter}} {{match | matchStage}}: #{{match.team_1_seed}} {{match.team_1_name}} vs. #{{match.team_2_seed}} {{match.team_2_name}}
                             </span>
                             <p>
-                                <strong>Match Time:</strong> {{match.date | formatMatchTime}}
-                                <template if="{{match.state == 'completed' && match.outcome_type != 'normal'}}">
-                                    ({{match.outcome_type | capitalizeFirstLetter}})
-                                </template>
-                                <template if="{{match.period}}">
-                                    ({{match.period}})
-                                </template>
+                                <strong>Time:</strong> {{match.date | formatMatchTime}}
                             </p>
                             <p>
                                 <strong>Status:</strong> {{match.state | capitalizeFirstLetter}}
@@ -54,7 +48,6 @@
                             </template>
                         </div>
                         <div class="card-action">
-                            <a href="http://play.esea.net/index.php?s=stats&d=match&id={{match.id}}">Match Page</a>
                             <a href="http://play.esea.net/index.php?s=stats&d=match&id={{match.id}}">Match Page</a>
                             <template if="{{match.state == 'live' && match.spectv_slave_host}}">
                                 <a href="steam://connect/{{match.spectv_slave_host}}:{{match.spectv_slave_port}}">Match TV</a>
