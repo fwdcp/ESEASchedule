@@ -4,7 +4,7 @@
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
 
-<polymer-element name="eseaschedule-controls" attributes="startDate endDate">
+<polymer-element name="eseaschedule-controls" attributes="startDate endDate selectedRegions selectedGames selectedDivisions selectedStatuses">
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
         <style>
@@ -17,7 +17,7 @@
         </style>
 
         <div class="row">
-            <div id="regions" class="col s12 m3">
+            <div id="regions" class="col s12 m2">
                 <h5>Regions</h5>
 
                 <template repeat="{{region in regions}}">
@@ -28,7 +28,7 @@
                 </template>
             </div>
 
-            <div id="games" class="col s12 m3">
+            <div id="games" class="col s12 m2">
                 <h5>Games</h5>
 
                 <template repeat="{{game in games}}">
@@ -39,7 +39,7 @@
                 </template>
             </div>
 
-            <div id="divisions" class="col s12 m3">
+            <div id="divisions" class="col s12 m2">
                 <h5>Divisions</h5>
 
                 <template repeat="{{division in divisions}}">
@@ -50,7 +50,18 @@
                 </template>
             </div>
 
-            <div class="col s12 m3">
+            <div id="statuses" class="col s12 m2">
+                <h5>Statuses</h5>
+
+                <template repeat="{{status in statuses}}">
+                    <core-label horizontal layout>
+                        <paper-checkbox for checked data-status-ID="{{status.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                        <p>{{status.name}}</p>
+                    </core-label>
+                </template>
+            </div>
+
+            <div class="col s12 m2">
                 <h5>Date Range</h5>
 
                 <h6>Start</h6>
@@ -84,9 +95,11 @@
             "regions": [],
             "games": [],
             "divisions": [],
+            "statuses": [{id: "pending", name: "Pending"}, {id: "upcoming", name: "Upcoming"}, {id: "live", name: "Live"}, {id: "completed", name: "Completed"}, {id: "special", name: "Forfeited/Overturned"}]
             "selectedRegions": [],
             "selectedGames": [],
             "selectedDivisions": [],
+            "selectedStatuses": ["pending", "upcoming", "live", "completed", "special"],
             "getFilters": function(event, detail, sender) {
                 if (sender.response) {
                     this.regions = sender.response.regions;
@@ -120,6 +133,11 @@
                 this.selectedDivisions = _.map(this.$.divisions.querySelectorAll("paper-checkbox[checked]"), function(value) {
                     return value.dataset.divisionID;
                 });
+                this.selectedStatuses = _.map(this.$.statuses.querySelectorAll("paper-checkbox[checked]"), function(value) {
+                    return value.dataset.statusID;
+                });
+
+                this.fire('selections-changed');
             }
         });
     </script>

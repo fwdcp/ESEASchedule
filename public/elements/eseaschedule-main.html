@@ -7,17 +7,18 @@
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
 
-        <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}"></eseaschedule-controls>
+        <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
         <eseaschedule-matches id="matches"></eseaschedule-matches>
 
         <core-ajax
         url="/matches/{{startDate | dateValueFormatter}}/{{endDate | dateValueFormatter}}/list.json"
         handleAs="json"
         auto
-        on-core-response="{{getMatches}}"></core-ajax>
+        on-core-response="{{updateMatches}}"></core-ajax>
     </template>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
 
     <script>
     Polymer({
@@ -25,9 +26,27 @@
         "dateValueFormatter": function(value) {
             return moment(value).format("YYYY-MM-DD");
         },
-        "getMatches": function(event, detail, sender) {
+        "updateMatches": function(event, detail, sender) {
             if (sender.response) {
-                this.$.matches.matches = sender.response;
+                var matches = sender.response;
+
+                matches = _.filter(matches, function(match) {
+                    return _.contains(this.selectedRegions, match.region_id);
+                }, this);
+
+                matches = _.filter(matches, function(match) {
+                    return _.contains(this.selectedGames, match.game_id);
+                }, this);
+
+                matches = _.filter(matches, function(match) {
+                    return _.contains(this.selectedDivisions, match.division_level);
+                }, this);
+
+                matches = _.sort(matches, function(match) {
+                    return +match.date;
+                })
+
+                this.$.matches.matches = matches;
             }
         }
     });
