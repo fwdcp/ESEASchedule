@@ -43,15 +43,14 @@
                                     <strong>Score:</strong> {{match.team_1_scores.t}}-{{match.team_2_scores.t}}
                                 </p>
                             </template>
-                            <template if="{{(match.state == 'live' && match.spectv_slave_host) || (match.state == 'completed' && +match.spectv_demo_id)}}">
-                                <div class="card-action">
-                                    <template if="{{match.state == 'live' && match.spectv_slave_host}}">
-                                        <a href="steam://connect/{{match.spectv_slave_host}}:{{match.spectv_slave_port}}">Match TV</a>
-                                    </template>
-                                    <template if="{{match.state == 'completed' && +match.spectv_demo_id}}">
-                                        <a href="http://play.esea.net/index.php?s=servers&d=download_replay&id={{match.spectv_demo_id}}">Match Demo</a>
-                                    </template>
-                                </div>
+                        </div>
+                        <div class="card-action">
+                            <a href="http://play.esea.net/index.php?s=stats&d=match&id={{match.id}}">Match Page</a>
+                            <template if="{{match.state == 'live' && match.spectv_slave_host}}">
+                                <a href="steam://connect/{{match.spectv_slave_host}}:{{match.spectv_slave_port}}">Match TV</a>
+                            </template>
+                            <template if="{{match.state == 'completed' && +match.spectv_demo_id}}">
+                                <a href="http://play.esea.net/index.php?s=servers&d=download_replay&id={{match.spectv_demo_id}}">Match Demo</a>
                             </template>
                         </div>
                     </div>
