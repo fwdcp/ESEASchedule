@@ -21,11 +21,11 @@
         </style>
 
         <core-drawer-panel id="main">
+            <core-toolbar>
+                <paper-icon-button icon="menu" core-drawer-toggle></core-icon-button>
+                <div flex>ESEA Schedule</div>
+            </core-toolbar>
             <core-header-panel flex>
-                <core-toolbar>
-                    <paper-icon-button icon="menu" core-drawer-toggle></core-icon-button>
-                    <div flex>ESEA Schedule</div>
-                </core-toolbar>
                 <div drawer>
                     <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
                 </div>
