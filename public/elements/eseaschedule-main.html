@@ -20,20 +20,20 @@
             }
         </style>
 
-        <core-header-panel flex>
+        <core-drawer-panel id="main">
             <core-toolbar>
                 <paper-icon-button icon="menu" core-drawer-toggle></core-icon-button>
-                <span flex>ESEA Schedule</span>
+                <div flex>ESEA Schedule</div>
             </core-toolbar>
-            <core-drawer-panel id="main">
+            <core-header-panel flex>
                 <div drawer>
                     <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
                 </div>
                 <div main>
                     <eseaschedule-matches id="matches"></eseaschedule-matches>
                 </div>
-            </core-drawer-panel>
-        </core-header-panel>
+            </core-header-panel>
+        </core-drawer-panel>
 
         <core-ajax
         url="/matches/{{startDate | dateValueFormatter}}/{{endDate | dateValueFormatter}}/list.json"
