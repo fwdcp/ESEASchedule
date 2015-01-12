@@ -22,7 +22,7 @@
 
                 <template repeat="{{region in regions}}">
                     <core-label horizontal layout>
-                        <paper-checkbox for checked data-region-ID="{{region.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                        <paper-checkbox for checked data-region-id="{{region.id}}" on-change="{{changeSelections}}"></paper-checkbox>
                         <p>{{region.name}}</p>
                     </core-label>
                 </template>
@@ -33,7 +33,7 @@
 
                 <template repeat="{{game in games}}">
                     <core-label horizontal layout>
-                        <paper-checkbox for checked data-game-ID="{{game.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                        <paper-checkbox for checked data-game-id="{{game.id}}" on-change="{{changeSelections}}"></paper-checkbox>
                         <p>{{game.name}}</p>
                     </core-label>
                 </template>
@@ -44,7 +44,7 @@
 
                 <template repeat="{{division in divisions}}">
                     <core-label horizontal layout>
-                        <paper-checkbox for checked data-division-ID="{{division.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                        <paper-checkbox for checked data-division-id="{{division.id}}" on-change="{{changeSelections}}"></paper-checkbox>
                         <p>{{division.name}}</p>
                     </core-label>
                 </template>
@@ -55,7 +55,7 @@
 
                 <template repeat="{{status in statuses}}">
                     <core-label horizontal layout>
-                        <paper-checkbox for checked data-status-ID="{{status.id}}" on-change="{{changeSelections}}"></paper-checkbox>
+                        <paper-checkbox for checked data-status-id="{{status.id}}" on-change="{{changeSelections}}"></paper-checkbox>
                         <p>{{status.name}}</p>
                     </core-label>
                 </template>
@@ -131,16 +131,16 @@
             },
             "changeSelections": function(event, detail, sender) {
                 this.selectedRegions = _.map(this.$.regions.querySelectorAll("paper-checkbox[checked]"), function(value) {
-                    return value.dataset.regionID;
+                    return value.dataset.regionId;
                 });
                 this.selectedGames = _.map(this.$.games.querySelectorAll("paper-checkbox[checked]"), function(value) {
-                    return value.dataset.gameID;
+                    return value.dataset.gameId;
                 });
                 this.selectedDivisions = _.map(this.$.divisions.querySelectorAll("paper-checkbox[checked]"), function(value) {
-                    return value.dataset.divisionID;
+                    return value.dataset.divisionId;
                 });
                 this.selectedStatuses = _.map(this.$.statuses.querySelectorAll("paper-checkbox[checked]"), function(value) {
-                    return value.dataset.statusID;
+                    return value.dataset.statusId;
                 });
 
                 this.fire('selections-changed');
