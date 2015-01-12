@@ -66,12 +66,12 @@
 
                 <h6>Start</h6>
                 <paper-input-decorator label="Start Date">
-                    <input is="core-input" type="date" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" on-commit="{{changeStartDate}}" preventInvalidInput></input>
+                    <input is="core-input" type="date" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="[[startDate | dateValueFormatter]]" id="startDate" on-commit="{{changeSelections}}" preventInvalidInput></input>
                 </paper-input-decorator>
 
                 <h6>End</h6>
                 <paper-input-decorator label="End Date">
-                    <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" on-commit="{{changeEndDate}}" preventInvalidInput></input>
+                    <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="[[endDate | dateValueFormatter]]" id="endDate" on-commit="{{changeSelections}}" preventInvalidInput></input>
                 </paper-input-decorator>
             </div>
         </div>
@@ -123,13 +123,10 @@
             "dateValueFormatter": function(value) {
                 return moment(value).format("YYYY-MM-DD");
             },
-            "changeStartDate": function(event, detail, sender) {
-                this.startDate = moment(sender.committedValue);
-            },
-            "changeEndDate": function(event, detail, sender) {
-                this.endDate = moment(sender.committedValue);
-            },
             "changeSelections": function(event, detail, sender) {
+                this.startDate = moment(this.$.startDate.value);
+                this.endDate = moment(this.$.startDate.value);
+
                 this.selectedRegions = _.map(this.$.regions.querySelectorAll("paper-checkbox[checked]"), function(value) {
                     return value.dataset.regionId;
                 });
