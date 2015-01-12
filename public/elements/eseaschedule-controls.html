@@ -1,6 +1,8 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../bower_components/core-icon/core-icon.html">
 <link rel="import" href="../bower_components/core-label/core-label.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
 <link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
@@ -19,6 +21,10 @@
                 line-height: 18px;
             }
         </style>
+
+        <paper-button>
+            <core-icon icon="refresh" on-change="{{refreshMatches}}"></core-icon> Refresh
+        </paper-button>
 
         <h5>Date Range</h5>
         <h6>Start</h6>
@@ -150,6 +156,9 @@
                 this.showTeamInfo = this.$.showTeamInfo.checked;
 
                 this.fire('selections-changed');
+            },
+            "refreshMatches": function(event, detail, sender) {
+                this.fire('refresh-requested');
             }
         });
     </script>

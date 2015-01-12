@@ -29,7 +29,7 @@
             </core-toolbar>
             <core-drawer-panel narrow="{{narrow}}" id="main">
                 <div drawer>
-                    <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}"></eseaschedule-controls>
+                    <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}" on-refresh-requested="{{refreshMatches}}"></eseaschedule-controls>
                 </div>
                 <div main>
                     <eseaschedule-matches id="matches"></eseaschedule-matches>
@@ -37,11 +37,15 @@
             </core-drawer-panel>
         </core-header-panel>
 
+        <paper-toast text="Match list has been updated." id="matchesUpdatedNotification"></paper-toast>
+        <paper-toast text="Error retrieving match list." id="matchRetrievalFailedNotification"><div on-click="{{toggleControls}}">Retry</div></paper-toast>
+
         <core-ajax
         url="/matches/{{startDate | dateValueFormatter}}/{{endDate | dateValueFormatter}}/list.json"
         handleAs="json"
         auto
-        on-core-response="{{updateMatches}}"></core-ajax>
+        on-core-response="{{updateMatches}}"
+        on-core-error="{{retrievalError}}"></core-ajax>
     </template>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
@@ -58,6 +62,7 @@
         "updateMatches": function(event, detail, sender) {
             if (sender.response) {
                 this.matches = sender.response;
+                this.$.matchesUpdatedNotification.show();
             }
 
             var matches = this.matches;
@@ -93,6 +98,12 @@
         },
         "toggleControls": function(event, detail, sender) {
             this.$.main.togglePanel();
+        },
+        "retrievalError": function(event, detail, sender) {
+            this.$.matchRetrievalFailedNotification.show();
+        },
+        "refreshMatches": function(event, detail, sender) {
+            this.$.matchAPI.go();
         }
     });
     </script>
