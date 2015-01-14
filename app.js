@@ -120,10 +120,7 @@ express.get('/filters.json', function(req, res) {
                     cb(null, {'latestSeasonStartDate': moment.unix(body.division.time_start), 'latestSeasonEndDate': moment.unix(body.division.time_end)});
                 }
             });
-        }],
-        "currentWeek": function(cb) {
-            cb(null, {'weekBegin': moment().day(0).startOf('day'), 'weekEnd': moment().day(6).endOf('day'), 'nextWeekEnd': moment().day(14).startOf('day')});
-        }
+        }]
     }, function(err, results) {
         if (err) {
             console.log(err);

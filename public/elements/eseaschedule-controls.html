@@ -28,12 +28,12 @@
 
         <h5>Date Range</h5>
         <h6>Start</h6>
-        <paper-input-decorator label="Start Date">
-            <input is="core-input" type="date" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" id="startDate" on-change="{{changeSelections}}"></input>
+        <paper-input-decorator label="Start">
+            <input is="core-input" type="datetime-local" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" id="startDate" on-change="{{changeSelections}}"></input>
         </paper-input-decorator>
         <h6>End</h6>
-        <paper-input-decorator label="End Date">
-            <input is="core-input" type="date" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" id="endDate" on-change="{{changeSelections}}"></input>
+        <paper-input-decorator label="End">
+            <input is="core-input" type="datetime-local" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" id="endDate" on-change="{{changeSelections}}"></input>
         </paper-input-decorator>
 
         <h5>Regions</h5>
@@ -99,9 +99,9 @@
     <script>
         Polymer({
             "oldestDate": moment("2008-11-24"),
-            "newestDate": moment(),
-            "startDate": moment(),
-            "endDate": moment(),
+            "newestDate": moment().day(14).endOf('day'),
+            "startDate": moment().day(0).hour(17).minute(0).startOf('minute'),
+            "endDate": moment().day(6).hour(23).minute(30).startOf('minute'),
             "regions": [],
             "games": [],
             "divisions": [],
@@ -126,14 +126,12 @@
                     this.selectedDivisions = _.map(sender.response.divisions, function(value) {
                         return value.id;
                     });
-                    this.startDate = moment(sender.response.weekBegin);
-                    this.endDate = moment(sender.response.weekEnd);
                     this.oldestDate = moment(sender.response.oldestDate);
                     this.newestDate = moment(sender.response.nextWeekEnd);
                 }
             },
             "dateValueFormatter": function(value) {
-                return moment(value).format("YYYY-MM-DD");
+                return moment(value).format();
             },
             "changeSelections": function(event, detail, sender) {
                 this.startDate = moment(this.$.startDate.value);
