@@ -139,9 +139,9 @@ express.get('/matches/:start/:end/list.json', function(req, res) {
     async.auto({
         "dates": function(cb) {
             var dates = [];
-            var currentDate = moment(startDate).startOf('day');
+            var currentDate = moment(startDate);
 
-            while (currentDate <= endDate) {
+            while (currentDate.isBefore(endDate, 'day') || currentDate.isSame(endDate, 'day')) {
                 dates.push(currentDate.format('YYYY-MM-DD'));
                 currentDate.add(1, 'days');
             }
