@@ -133,11 +133,13 @@ express.get('/filters.json', function(req, res) {
 });
 
 express.get('/matches/:start/:end/list.json', function(req, res) {
+    var startDate = moment.unix(req.params.start);
+    var endDate = moment.unix(req.params.end);
+
     async.auto({
         "dates": function(cb) {
             var dates = [];
-            var currentDate = moment.unix(req.params.start).startOf('day');
-            var endDate = moment.unix(req.params.end);
+            var currentDate = startDate.startOf('day');
 
             while (currentDate <= endDate) {
                 dates.push(currentDate.format('YYYY-MM-DD'));
@@ -220,18 +222,20 @@ express.get('/matches/:start/:end/list.json', function(req, res) {
                                     // remainder of season: 6 hours
                                     // everything else: 24 hours
 
+                                    // NOTE: isBetween is NOT inclusive, so adjustments have to be made for our desired results
+
                                     var ttl;
 
                                     if (moment(date).isBetween(moment().subtract(1, 'days'), moment().add(1, 'days'), 'day')) {
                                         ttl = '15s';
                                     }
-                                    else if (moment(date).isBetween(moment().day(0), moment().day(6), 'day')) {
+                                    else if (moment(date).isBetween(moment().day(0).subtract(1, 'days'), moment().day(6).add(1, 'days'), 'day')) {
                                         ttl = '15m';
                                     }
-                                    else if (moment(date).isBetween(moment().day(-7), moment().day(13), 'day')) {
+                                    else if (moment(date).isBetween(moment().day(-7).subtract(1, 'days'), moment().day(13).add(1, 'days'), 'day')) {
                                         ttl = '1h';
                                     }
-                                    else if (moment(date).isBetween(moment(results.seasonDates.start), moment(results.seasonDates.end), 'day')) {
+                                    else if (moment(date).isBetween(moment(results.seasonDates.start).subtract(1, 'days'), moment(results.seasonDates.end).add(1, 'days'), 'day')) {
                                         ttl = '6h';
                                     }
                                     else {
@@ -260,7 +264,7 @@ express.get('/matches/:start/:end/list.json', function(req, res) {
         }],
         "correctMatches": ['matches', function(cb, results) {
             cb(null, underscore.filter(results.matches, function(match) {
-                return moment.unix(match.date).isBetween(moment.unix(req.params.start), moment.unix(req.params.end));
+                return moment.unix(match.date).isSame(startDate) || moment.unix(match.date).isSame(endDate) || moment.unix(match.date).isBetween(startDate, endDate);
             }));
         }]
     }, function(err, results) {
