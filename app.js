@@ -136,8 +136,8 @@ express.get('/matches/:start/:end/list.json', function(req, res) {
     async.auto({
         "dates": function(cb) {
             var dates = [];
-            var currentDate = moment(req.params.start);
-            var endDate = moment(req.params.end);
+            var currentDate = moment.unix(req.params.start);
+            var endDate = moment.unix(req.params.end);
 
             while (currentDate <= endDate) {
                 dates.push(currentDate.format('YYYY-MM-DD'));
@@ -214,29 +214,25 @@ express.get('/matches/:start/:end/list.json', function(req, res) {
                                 }
                                 else {
                                     // CACHE EXPIRY:
-                                    // today: 15 sec
-                                    // yesterday/tomorrow: 5 minutes
-                                    // this week: 30 minutes
+                                    // yesterday/today/tomorrow: 5 minutes
+                                    // this week: 15 minutes
                                     // last/next week: 1 hour
-                                    // remainder of season: 3 hours
+                                    // remainder of season: 6 hours
                                     // everything else: 24 hours
 
                                     var ttl;
 
-                                    if (moment(date).isSame(moment(), 'day')) {
+                                    if (moment(date).isBetween(moment().subtract(1, 'days'), moment().add(1, 'days'), 'day')) {
                                         ttl = '15s';
                                     }
-                                    else if (moment(date).isBetween(moment().subtract(1, 'days'), moment().add(1, 'days'), 'day')) {
-                                        ttl = '5m';
-                                    }
                                     else if (moment(date).isBetween(moment().day(0), moment().day(6), 'day')) {
-                                        ttl = '30m';
+                                        ttl = '15m';
                                     }
                                     else if (moment(date).isBetween(moment().day(-7), moment().day(13), 'day')) {
                                         ttl = '1h';
                                     }
                                     else if (moment(date).isBetween(moment(results.seasonDates.start), moment(results.seasonDates.end), 'day')) {
-                                        ttl = '3h';
+                                        ttl = '6h';
                                     }
                                     else {
                                         ttl = '24h';
@@ -261,6 +257,11 @@ express.get('/matches/:start/:end/list.json', function(req, res) {
                     cb(null, underscore.flatten(results));
                 }
             });
+        }],
+        "correctMatches": ['matches', function(cb, results) {
+            cb(null, underscore.filter(results.correctMatches, function(match) {
+                return moment.unix(match.date).isBetween(moment.unix(req.params.start), moment.unix(req.params.end));
+            }));
         }]
     }, function(err, results) {
         if (err) {
@@ -268,7 +269,7 @@ express.get('/matches/:start/:end/list.json', function(req, res) {
             res.status(500).end();
         }
         else {
-            res.json(results.matches);
+            res.json(results.correctMatches);
         }
     });
 });

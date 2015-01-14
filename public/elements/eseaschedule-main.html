@@ -59,7 +59,7 @@
         "showScores": false,
         "showTeamInfo": false,
         "dateValueFormatter": function(value) {
-            return moment(value).format("YYYY-MM-DD");
+            return moment(value).unix();
         },
         "updateMatches": function(event, detail, sender) {
             if (sender.response) {
