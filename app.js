@@ -259,7 +259,7 @@ express.get('/matches/:start/:end/list.json', function(req, res) {
             });
         }],
         "correctMatches": ['matches', function(cb, results) {
-            cb(null, underscore.filter(results.correctMatches, function(match) {
+            cb(null, underscore.filter(results.matches, function(match) {
                 return moment.unix(match.date).isBetween(moment.unix(req.params.start), moment.unix(req.params.end));
             }));
         }]
