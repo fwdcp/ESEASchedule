@@ -29,11 +29,11 @@
         <h5>Date Range</h5>
         <h6>Start</h6>
         <paper-input-decorator label="Start">
-            <input is="core-input" type="datetime-local" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" id="startDate" on-change="{{changeSelections}}"></input>
+            <input is="core-input" type="datetime-local" step="1800" min="{{oldestDate | dateValueFormatter}}" max="{{endDate | dateValueFormatter}}" value="{{startDate | dateValueFormatter}}" id="startDate" on-change="{{changeSelections}}"></input>
         </paper-input-decorator>
         <h6>End</h6>
         <paper-input-decorator label="End">
-            <input is="core-input" type="datetime-local" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" id="endDate" on-change="{{changeSelections}}"></input>
+            <input is="core-input" type="datetime-local" step="1800" min="{{startDate | dateValueFormatter}}" max="{{newestDate | dateValueFormatter}}" value="{{endDate | dateValueFormatter}}" id="endDate" on-change="{{changeSelections}}"></input>
         </paper-input-decorator>
 
         <h5>Regions</h5>
@@ -131,7 +131,7 @@
                 }
             },
             "dateValueFormatter": function(value) {
-                return moment(value).format();
+                return moment(value).format("YYYY-MM-DDTHH:mm:ss");
             },
             "changeSelections": function(event, detail, sender) {
                 this.startDate = moment(this.$.startDate.value);
