@@ -136,7 +136,7 @@ express.get('/matches/:start/:end/list.json', function(req, res) {
     async.auto({
         "dates": function(cb) {
             var dates = [];
-            var currentDate = moment.unix(req.params.start);
+            var currentDate = moment.unix(req.params.start).startOf('day');
             var endDate = moment.unix(req.params.end);
 
             while (currentDate <= endDate) {
