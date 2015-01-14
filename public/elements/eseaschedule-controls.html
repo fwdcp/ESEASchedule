@@ -133,8 +133,10 @@
                 return moment(value).format("YYYY-MM-DDTHH:mm:ss");
             },
             "changeSelections": function(event, detail, sender) {
+                if (this.endDate == moment(this.$.endDate.value)) {
+                    this.endDate == moment(this.$.endDate.value).add(moment(this.$.startDate.value).diff(this.startDate));
+                }
                 this.startDate = moment(this.$.startDate.value);
-                this.endDate = moment(this.$.endDate.value);
 
                 this.selectedRegions = _.map(this.$.regions.querySelectorAll("paper-checkbox[checked]"), function(value) {
                     return value.dataset.regionId;
