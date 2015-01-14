@@ -134,7 +134,7 @@
             },
             "changeSelections": function(event, detail, sender) {
                 if (this.endDate == moment(this.$.endDate.value)) {
-                    this.endDate == moment(this.$.endDate.value).add(moment(this.$.startDate.value).diff(this.startDate));
+                    this.endDate = moment(this.$.endDate.value).add(moment(this.$.startDate.value).diff(this.startDate));
                 }
                 this.startDate = moment(this.$.startDate.value);
 
