@@ -30,7 +30,7 @@
             </core-toolbar>
             <core-drawer-panel narrow="{{narrow}}" id="main">
                 <div drawer>
-                    <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showScores="{{showScores}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}" on-refresh-requested="{{refreshMatches}}"></eseaschedule-controls>
+                    <eseaschedule-controls startDate="{{startDate}}" endDate="{{endDate}}" selectedRegions="{{selectedRegions}}" selectedGames="{{selectedGames}}" selectedDivisions="{{selectedDivisions}}" selectedStatuses="{{selectedStatuses}}" showResults="{{showResults}}" showTeamInfo="{{showTeamInfo}}" on-selections-changed="{{updateMatches}}" on-refresh-requested="{{refreshMatches}}"></eseaschedule-controls>
                 </div>
                 <div main>
                     <eseaschedule-matches id="matches"></eseaschedule-matches>
@@ -56,7 +56,7 @@
     <script>
     Polymer({
         "matches": [],
-        "showScores": false,
+        "showResults": false,
         "showTeamInfo": false,
         "dateValueFormatter": function(value) {
             return moment(value).unix();
@@ -139,7 +139,7 @@
             });
 
             this.$.matches.matches = matches;
-            this.$.matches.showScores = this.showScores;
+            this.$.matches.showResults = this.showResults;
             this.$.matches.showTeamInfo = this.showTeamInfo;
         },
         "toggleControls": function(event, detail, sender) {

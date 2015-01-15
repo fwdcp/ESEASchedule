@@ -7,7 +7,7 @@
 <link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
 <link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
 
-<polymer-element name="eseaschedule-controls" attributes="startDate endDate selectedRegions selectedGames selectedDivisions selectedStatuses showScores showTeamInfo">
+<polymer-element name="eseaschedule-controls" attributes="startDate endDate selectedRegions selectedGames selectedDivisions selectedStatuses showResults showTeamInfo">
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
         <style>
@@ -78,8 +78,8 @@
 
         <h5>Options</h5>
         <div center horizontal layout>
-            <div flex>Show Scores</div>
-            <paper-toggle-button checked?="{{showScores}}" id="showScores" on-change="{{changeSelections}}"></paper-toggle-button>
+            <div flex>Show Results</div>
+            <paper-toggle-button checked?="{{showResults}}" id="showResults" on-change="{{changeSelections}}"></paper-toggle-button>
         </div>
         <div center horizontal layout>
             <div flex>Show Team Information</div>
@@ -95,6 +95,7 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/URI.js/1.11.2/URI.min.js"></script>
 
     <script>
         Polymer({
@@ -110,7 +111,7 @@
             "selectedGames": [],
             "selectedDivisions": [],
             "selectedStatuses": ["pending", "upcoming", "live", "completedNormal", "completedSpecial"],
-            "showScores": false,
+            "showResults": false,
             "showTeamInfo": false,
             "getFilters": function(event, detail, sender) {
                 if (sender.response) {
@@ -149,7 +150,7 @@
                     return value.dataset.statusId;
                 });
 
-                this.showScores = this.$.showScores.checked;
+                this.showResults = this.$.showResults.checked;
                 this.showTeamInfo = this.$.showTeamInfo.checked;
 
                 this.fire('selections-changed');

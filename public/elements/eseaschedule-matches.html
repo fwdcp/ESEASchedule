@@ -4,7 +4,7 @@
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
 
-<polymer-element name="eseaschedule-matches" attributes="matches showScores showTeamInfo">
+<polymer-element name="eseaschedule-matches" attributes="matches showResults showTeamInfo">
     <template>
         <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css">
 
@@ -19,9 +19,6 @@
                         <strong>Status:</strong> {{match.state | capitalizeFirstLetter}}
                         <template if="{{match.state == 'completed' && match.outcome_type != 'normal'}}">
                             ({{match.outcome_type | capitalizeFirstLetter}})
-                        </template>
-                        <template if="{{match.period}}">
-                            ({{match.period}})
                         </template>
                     </p>
                     <p>
@@ -44,10 +41,13 @@
                             </template>
                         </p>
                     </template>
-                    <template if="{{showScores && (match.team_1_scores.t || match.team_2_scores.t)}}">
-                        <p>
-                            <strong>Score:</strong> {{match.team_1_scores.t}}-{{match.team_2_scores.t}}
-                        </p>
+                    <template if="{{showResults}}">
+                        <template if="(match.team_1_scores.t || match.team_2_scores.t)">
+                            <p><strong>Score:</strong> {{match.team_1_scores.t}}-{{match.team_2_scores.t}}</p>
+                        </template>
+                        <template if="{{match.period}}">
+                            <p><strong>Period:</strong> {{match.period}}</p>
+                        </template>
                     </template>
                 </div>
                 <div class="card-action">
