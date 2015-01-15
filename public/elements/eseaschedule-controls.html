@@ -139,19 +139,19 @@
 
                 _.each(this.$.regions.querySelectorAll("paper-checkbox"), function(element) {
                     this.selectedRegions[element.dataset.regionId] = element.checked;
-                });
+                }, this);
 
                 _.each(this.$.games.querySelectorAll("paper-checkbox"), function(element) {
                     this.selectedGames[element.dataset.gameId] = element.checked;
-                });
+                }, this);
 
                 _.each(this.$.divisions.querySelectorAll("paper-checkbox"), function(element) {
                     this.selectedDivisions[element.dataset.divisionId] = element.checked;
-                });
+                }, this);
 
                 _.each(this.$.statuses.querySelectorAll("paper-checkbox"), function(element) {
                     this.selectedStatuses[element.dataset.statusId] = element.checked;
-                });
+                }, this);
 
                 this.showResults = this.$.showResults.checked;
                 this.showTeamInfo = this.$.showTeamInfo.checked;
