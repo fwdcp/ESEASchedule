@@ -70,23 +70,23 @@
             var matches = this.matches;
 
             matches = _.filter(matches, function(match) {
-                return _.contains(this.selectedRegions, match.region_id);
+                return this.selectedRegions[match.region_id];
             }, this);
 
             matches = _.filter(matches, function(match) {
-                return _.contains(this.selectedGames, match.game_id);
+                return this.selectedGames[match.game_id];
             }, this);
 
             matches = _.filter(matches, function(match) {
-                return _.contains(this.selectedDivisions, match.division_level);
+                return this.selectedDivisions[match.division_level];
             }, this);
 
             matches = _.filter(matches, function(match) {
                 if (match.state == 'completed') {
-                    return (match.outcome_type == 'normal' && _.contains(this.selectedStatuses, 'completedNormal')) || (match.outcome_type != 'normal' && _.contains(this.selectedStatuses, 'completedSpecial'));
+                    return (match.outcome_type == 'normal' && this.selectedStatuses["completedNormal"]) || (match.outcome_type != 'normal' && this.selectedStatuses["completedSpecial"]);
                 }
                 else {
-                    return _.contains(this.selectedStatuses, match.state);
+                    return this.selectedStatuses[match.state];
                 }
             }, this);
 
