@@ -13,7 +13,7 @@
                 <div class="card-content white-text">
                     <span class="card-title">
                         <core-icon src="/img/esea_games/{{match.game_icon}}"></core-icon>
-                        S{{match.season}} {{match.game_abbr}} {{match.region_abbr}} {{match.division_level | capitalizeFirstLetter}} {{match | matchStage}}: {{match.team_1_name}} vs. {{match.team_2_name}}
+                        S{{match.season}} {{match.game_abbr}} {{match.region_abbr}} {{match.division_level | capitalizeFirstLetter}} {{match | matchStage}} - {{match.team_1_name}} vs. {{match.team_2_name}}
                     </span>
                     <p>
                         <strong>Status:</strong> {{match.state | capitalizeFirstLetter}}
