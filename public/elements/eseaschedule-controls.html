@@ -119,19 +119,19 @@
                     this.games = sender.response.games;
                     this.divisions = sender.response.divisions;
                     this.selectedRegions = _.object(_.map(sender.response.regions, function(element) {
-                        return [value.id, true];
+                        return [element.id, true];
                     }));
                     this.selectedGames = _.object(_.map(sender.response.games, function(element) {
-                        return [value.id, true];
+                        return [element.id, true];
                     }));
                     this.selectedDivisions = _.object(_.map(sender.response.divisions, function(element) {
-                        return [value.id, true];
+                        return [element.id, true];
                     }));
                     this.oldestDate = moment(sender.response.oldestDate);
                 }
             },
-            "dateValueFormatter": function(value) {
-                return moment(value).format("YYYY-MM-DDTHH:mm:ss");
+            "dateValueFormatter": function(date) {
+                return moment(date).format("YYYY-MM-DDTHH:mm:ss");
             },
             "changeSelections": function(event, detail, sender) {
                 this.startDate = moment(this.$.startDate.value);

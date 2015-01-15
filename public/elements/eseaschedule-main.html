@@ -58,8 +58,8 @@
         "matches": [],
         "showResults": false,
         "showTeamInfo": false,
-        "dateValueFormatter": function(value) {
-            return moment(value).unix();
+        "dateValueFormatter": function(date) {
+            return moment(date).unix();
         },
         "updateMatches": function(event, detail, sender) {
             if (sender.response) {
