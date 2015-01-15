@@ -42,7 +42,7 @@
                         </p>
                     </template>
                     <template if="{{showResults}}">
-                        <template if="(match.team_1_scores.t || match.team_2_scores.t)">
+                        <template if="{{match.team_1_scores.t || match.team_2_scores.t}}">
                             <p><strong>Score:</strong> {{match.team_1_scores.t}}-{{match.team_2_scores.t}}</p>
                         </template>
                         <template if="{{match.period}}">
