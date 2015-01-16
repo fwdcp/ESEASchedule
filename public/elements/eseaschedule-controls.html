@@ -202,11 +202,11 @@
                 var query = new URI(window.location).query(true);
 
                 if (_.has(query, "start")) {
-                    this.startDate = moment.unix(startDate);
+                    this.startDate = moment.unix(query.start);
                 }
 
                 if (_.has(query, "end")) {
-                    this.endDate = moment.unix(endDate);
+                    this.endDate = moment.unix(query.end);
                 }
 
                 if (_.has(query, "region")) {
