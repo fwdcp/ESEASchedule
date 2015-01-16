@@ -217,19 +217,19 @@
 
                 if (_.has(query, "game")) {
                     _.each(this.selectedGames, function(selected, game) {
-                        this.selectedGames[region] = _.contains(query.game, game);
+                        this.selectedGames[game] = _.contains(query.game, game);
                     }, this);
                 }
 
                 if (_.has(query, "division")) {
                     _.each(this.selectedDivisions, function(selected, division) {
-                        this.selectedDivisions[region] = _.contains(query.division, division);
+                        this.selectedDivisions[division] = _.contains(query.division, division);
                     }, this);
                 }
 
                 if (_.has(query, "status")) {
                     _.each(this.selectedStatuses, function(selected, status) {
-                        this.selectedStatuses[region] = _.contains(query.status, status);
+                        this.selectedStatuses[status] = _.contains(query.status, status);
                     }, this);
                 }
 
