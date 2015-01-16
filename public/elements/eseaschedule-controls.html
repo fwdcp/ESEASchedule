@@ -210,24 +210,40 @@
                 }
 
                 if (_.has(query, "region")) {
+                    if (!_.isArray(query.region)) {
+                        query.region = [query.region];
+                    }
+
                     _.each(this.selectedRegions, function(selected, region) {
                         this.selectedRegions[region] = _.contains(query.region, region);
                     }, this);
                 }
 
                 if (_.has(query, "game")) {
+                    if (!_.isArray(query.game)) {
+                        query.game = [query.game];
+                    }
+
                     _.each(this.selectedGames, function(selected, game) {
                         this.selectedGames[game] = _.contains(query.game, game);
                     }, this);
                 }
 
                 if (_.has(query, "division")) {
+                    if (!_.isArray(query.division)) {
+                        query.division = [query.division];
+                    }
+
                     _.each(this.selectedDivisions, function(selected, division) {
                         this.selectedDivisions[division] = _.contains(query.division, division);
                     }, this);
                 }
 
                 if (_.has(query, "status")) {
+                    if (!_.isArray(query.status)) {
+                        query.status = [query.status];
+                    }
+
                     _.each(this.selectedStatuses, function(selected, status) {
                         this.selectedStatuses[status] = _.contains(query.status, status);
                     }, this);
