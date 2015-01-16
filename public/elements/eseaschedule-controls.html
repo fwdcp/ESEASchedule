@@ -256,6 +256,8 @@
                 if (_.has(query, "teaminfo")) {
                     this.showTeamInfo = query.teaminfo == "0" ? 0 : 1;
                 }
+
+                this.fire('selections-changed');
             },
             "refreshMatches": function(event, detail, sender) {
                 this.fire('refresh-requested');
