@@ -128,6 +128,8 @@
                         return [element.id, true];
                     }));
                     this.oldestDate = moment(sender.response.oldestDate);
+
+                    this.updateSelectionsFromURI();
                 }
             },
             "dateValueFormatter": function(date) {
@@ -156,10 +158,96 @@
                 this.showResults = this.$.showResults.checked;
                 this.showTeamInfo = this.$.showTeamInfo.checked;
 
+                this.updateURI();
+
                 this.fire('selections-changed');
+            },
+            "updateURI": function() {
+                var uri = new URI(window.location);
+
+                uri.query({
+                    start: moment(this.startDate).unix(),
+                    end: moment(this.endDate).unix(),
+                    results: this.showResults ? 1 : 0,
+                    teaminfo: this.showTeamInfo ? 1 : 0
+                });
+
+                _.each(this.selectedRegions, function(selected, region) {
+                    if (selected) {
+                        uri.addQuery("region", region);
+                    }
+                });
+
+                _.each(this.selectedGames, function(selected, game) {
+                    if (selected) {
+                        uri.addQuery("game", game);
+                    }
+                });
+
+                _.each(this.selectedDivisions, function(selected, division) {
+                    if (selected) {
+                        uri.addQuery("division", division);
+                    }
+                });
+
+                _.each(this.selectedStatuses, function(selected, status) {
+                    if (selected) {
+                        uri.addQuery("status", status);
+                    }
+                });
+
+                history.pushState(null, "", uri.toString());
+            },
+            "updateSelectionsFromURI": function() {
+                var query = new URI(window.location).query(true);
+
+                if (_.has(query, "start")) {
+                    this.startDate = moment.unix(startDate);
+                }
+
+                if (_.has(query, "end")) {
+                    this.endDate = moment.unix(endDate);
+                }
+
+                if (_.has(query, "region")) {
+                    _.each(this.selectedRegions, function(selected, region) {
+                        this.selectedRegions[region] = _.contains(query.region, region);
+                    });
+                }
+
+                if (_.has(query, "game")) {
+                    _.each(this.selectedGames, function(selected, game) {
+                        this.selectedGames[region] = _.contains(query.game, game);
+                    });
+                }
+
+                if (_.has(query, "division")) {
+                    _.each(this.selectedDivisions, function(selected, division) {
+                        this.selectedDivisions[region] = _.contains(query.division, division);
+                    });
+                }
+
+                if (_.has(query, "status")) {
+                    _.each(this.selectedStatuses, function(selected, status) {
+                        this.selectedStatuses[region] = _.contains(query.status, status);
+                    });
+                }
+
+                if (_.has(query, "results")) {
+                    this.showResults = query.results == "0" ? 0 : 1;
+                }
+
+                if (_.has(query, "teaminfo")) {
+                    this.showTeamInfo = query.teaminfo == "0" ? 0 : 1;
+                }
             },
             "refreshMatches": function(event, detail, sender) {
                 this.fire('refresh-requested');
+            },
+            "ready": function() {
+                window.addEventListener("popstate", function(event) {
+                    this.updateSelectionsFromURI();
+                }.bind(this));
             }
         });
     </script>
