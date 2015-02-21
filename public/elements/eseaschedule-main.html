@@ -39,7 +39,7 @@
         </core-header-panel>
 
         <paper-toast text="Match list has been updated." id="matchesUpdatedNotification"></paper-toast>
-        <paper-toast text="Error retrieving match list." id="matchRetrievalFailedNotification"><div on-click="{{toggleControls}}">Retry</div></paper-toast>
+        <paper-toast text="Error retrieving match list." id="matchRetrievalFailedNotification"><div on-click="{{refreshMatches}}">Retry</div></paper-toast>
 
         <core-ajax
         url="/matches/{{startDate | dateValueFormatter}}/{{endDate | dateValueFormatter}}/list.json"

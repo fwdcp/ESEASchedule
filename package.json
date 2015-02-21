@@ -1,7 +1,7 @@
 {
-  "name": "ESEARegTracker",
-  "version": "0.0.0",
-  "description": "tracking ESEA registration stats",
+  "name": "ESEASchedule",
+  "version": "0.1.0",
+  "description": "web application to retrieve and display matches on the ESEA schedule",
   "main": "app.js",
   "dependencies": {
     "async": "^0.9.0",
@@ -19,5 +19,13 @@
   },
   "author": "Forward Command Post",
   "private": true,
-  "license": "none"
+  "license": "none",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fwdcp/ESEASchedule.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fwdcp/ESEASchedule/issues"
+  },
+  "homepage": "https://github.com/fwdcp/ESEASchedule"
 }
